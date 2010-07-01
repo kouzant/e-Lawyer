@@ -1,5 +1,6 @@
 <%@ include file="header.jsp" %>
-  
+<%@ include file="left.jsp" %>
+
     <div id="col_2">
       <p class="floatright alignright"><b>Page 1</b><br />
         [ 1, <a href="http://www.free-css.com/">2</a>, <a href="http://www.free-css.com/">3</a>, <a href="http://www.free-css.com/">4</a> ]</p>
