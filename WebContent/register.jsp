@@ -17,7 +17,8 @@ if (session.getAttribute("error")=="3"){
 if (session.getAttribute("error")=="4"){
 %>
 <font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
-<%} %>
+<%} 
+if (session.getAttribute("error")!="0"){%>
 <form method="post" action="Register">
 <table border="0" align="left">
 <tr>
@@ -33,5 +34,10 @@ if (session.getAttribute("error")=="4"){
 <h4 align="left">* Υποχρεωτικά Πεδία</h4><br>
 <input type="submit" value="Go!">
 </form>
+<%}else{ %>
+<div align="center">
+<h2>Η εγγραφή σας ολοκληρώθηκαι με επιτυχία. Μπορείτε να εισέλθεται από <a href="login.jsp">εδώ</a></h2>
+</div>
+<%} %>
 </div>
 <%@ include file="footer.jsp" %>
