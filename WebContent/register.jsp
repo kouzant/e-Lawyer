@@ -1,6 +1,6 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
-<div id="col_1">
+<div id="col_2">
 <%
 if (session.getAttribute("error")=="1"){
 %>
@@ -22,21 +22,21 @@ if (session.getAttribute("error")!="0"){%>
 <form method="post" action="Register">
 <table border="0" align="left">
 <tr>
-<th><h2>* Όνομα:</h2> </th><th><input type="text" name="name" value="<%if (session.getAttribute("name")!=null) out.println(session.getAttribute("name"));%>"></th></tr>
-<tr><th><h2>* Επίθετο:</h2></th> <th><input type="text" name="surname" value="<%if (session.getAttribute("surname")!=null) out.println(session.getAttribute("surname"));%>"></th></tr>
-<tr><th><h2>* Ηλ. Ταχυδρομίο:</h2></th> <th><input type="text" name="email" value="<%if (session.getAttribute("email")!=null) out.println(session.getAttribute("email"));%>"></th></tr>
-<tr><th><h2>* Κωδικός:</h2></th> <th><input type="password" name="password"></th></tr>
-<tr><th><h2>* Επανάληψη Κωδικού:</h2></th> <th><input type="password" name="repass"></th></tr>
-<tr><th><h2>Τηλέφωνο:</h2></th> <th><input type="text" name="telephone" value="<%if (session.getAttribute("telephone")!=null) out.println(session.getAttribute("telephone"));%>"></th></tr>
-<tr><th><h2>Διεύθυνση:</h2></th> <th><input type="text" name="address" value="<%if (session.getAttribute("address")!=null) out.println(session.getAttribute("address"));%>"></th></tr>
-<tr><th><h2>Ταχ. Κωδικός:</h2></th> <th><input type="text" name="postcode" value="<%if (session.getAttribute("postcode")!=null) out.println(session.getAttribute("postcode"));%>"></th></tr>
+<th><h4>* Όνομα:</h4> </th><th><input type="text" name="name" value="<%if (session.getAttribute("name")!=null) out.println(session.getAttribute("name"));%>"></th></tr>
+<tr><th><h4>* Επίθετο:</h4></th> <th><input type="text" name="surname" value="<%if (session.getAttribute("surname")!=null) out.println(session.getAttribute("surname"));%>"></th></tr>
+<tr><th><h4>* Ηλ. Ταχυδρομίο:</h4></th> <th><input type="text" name="email" value="<%if (session.getAttribute("email")!=null) out.println(session.getAttribute("email"));%>"></th></tr>
+<tr><th><h4>* Κωδικός:</h4></th> <th><input type="password" name="password"></th></tr>
+<tr><th><h4>* Επανάληψη Κωδικού:</h4></th> <th><input type="password" name="repass"></th></tr>
+<tr><th><h4>&nbsp;&nbsp;Τηλέφωνο:</h4></th> <th><input type="text" name="telephone" value="<%if (session.getAttribute("telephone")!=null) out.println(session.getAttribute("telephone"));%>"></th></tr>
+<tr><th><h4>&nbsp;&nbsp;Διεύθυνση:</h4></th> <th><input type="text" name="address" value="<%if (session.getAttribute("address")!=null) out.println(session.getAttribute("address"));%>"></th></tr>
+<tr><th><h4>&nbsp;&nbsp;Ταχ. Κωδικός:</h4></th> <th><input type="text" name="postcode" value="<%if (session.getAttribute("postcode")!=null) out.println(session.getAttribute("postcode"));%>"></th></tr>
+<tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
+<tr><th><input type="submit" value="Go!"></th></tr>
 </table>
-<h4 align="left">* Υποχρεωτικά Πεδία</h4><br>
-<input type="submit" value="Go!">
 </form>
 <%}else{ %>
 <div align="center">
-<h2>Η εγγραφή σας ολοκληρώθηκαι με επιτυχία. Μπορείτε να εισέλθεται από <a href="login.jsp">εδώ</a></h2>
+<h3>Η εγγραφή σας ολοκληρώθηκαι με επιτυχία. Μπορείτε να εισέλθεται από <a href="login.jsp">εδώ</a></h3>
 </div>
 <%} %>
 </div>
