@@ -13,6 +13,10 @@ if (session.getAttribute("error")=="2"){
 if (session.getAttribute("error")=="3"){
 %>
 <font color="red"><u>FATAL ERROR: Η εγγραφή στη βάση απέτυχε. Ενημερώστε τον διαχειριστή.</u></font>
+<%}
+if (session.getAttribute("error")=="4"){
+%>
+<font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
 <%} %>
 <form method="post" action="Register">
 <table border="0" align="left">

@@ -69,7 +69,8 @@ public class Register extends HttpServlet {
 		String postcode=request.getParameter("postcode");
 		HttpSession userSession=request.getSession(true);
 		userSession.setMaxInactiveInterval(5);
-		
+		DatabaseMethods point = new DatabaseMethods();
+
 		//Unfilled required fields
 		if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()){
 			userSession.setAttribute("error", "1");
@@ -80,21 +81,26 @@ public class Register extends HttpServlet {
 			//Concatenate name, surname, email
 			String id=name.concat(surname).concat(email);
 			String idHash=shaDigest(id);
-			String passHash=shaDigest(password);
-			int isadmin=0;
-			System.out.println(idHash);
-			int intTelephone=integerize(telephone);
-			int intPostCode=integerize(postcode);
-			ConnectDb point = new ConnectDb();
-			int val=point.registerUser(name,surname,email,passHash,idHash,intTelephone,address,intPostCode,isadmin);
-			
-			if (val!=0){
-				//Everything went fabulous
-				userSession.setAttribute("error", "0");
+			if (point.uniqueUser(idHash,email)!=1){
+				String passHash=shaDigest(password);
+				//Is Administrator
+				int isadmin=0;
+				System.out.println(idHash);
+				int intTelephone=integerize(telephone);
+				int intPostCode=integerize(postcode);
+				int val=point.registerUser(name,surname,email,passHash,idHash,intTelephone,address,intPostCode,isadmin);
+				
+				if (val!=0){
+					//Everything went fabulous
+					userSession.setAttribute("error", "0");
+				}else{
+					//Write to database error
+					userSession.setAttribute("error", "3");
+				}
 			}else{
-				//Write to database error
-				userSession.setAttribute("error", "3");
+				userSession.setAttribute("error","4");
 			}
+			
 		}
 		
 		userSession.setAttribute("name", name);

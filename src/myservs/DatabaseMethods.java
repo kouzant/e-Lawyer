@@ -2,7 +2,7 @@ package myservs;
 
 import java.sql.*;
 
-public class ConnectDb {
+public class DatabaseMethods {
 
 	//Method for connecting to db server
 	public Connection connect(){
@@ -35,9 +35,38 @@ public class ConnectDb {
 			System.out.println("SQL statement did not executed");
 			int result=0;
 			return result;
+		}finally{
+			closedb(con);
 		}
 	}
 	
+	//Method for identifying unique users
+	public int uniqueUser(String id, String email){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String uniqueQuery="SELECT id,email FROM users";
+			ResultSet result=stmt.executeQuery(uniqueQuery);
+			int exists=0;
+			
+			while (result.next()){
+				String usersId=result.getString(1);
+				String usersEmail=result.getString(2);
+				if ((id.equals(usersId)) || (email.equals(usersEmail))){
+					//User with same login details already exists
+					exists=1;
+				}
+			}
+			return exists;
+		}catch (SQLException e){
+			System.out.println("SQL statement did not executed");
+			int sqlError=1;
+			return sqlError;
+		}finally{
+			closedb(con);
+		}		
+	}
 	//Method for closing the connection to db server
 	public void closedb(Connection con){
 		if (con != null){
