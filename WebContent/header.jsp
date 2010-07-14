@@ -11,8 +11,8 @@
   <div id="header"> <a href="index.htm"><img src="assets/images/logo_header.gif" alt="" width="203" height="102" class="logo" /></a> </div>
   <ul id="nav">
     <li><a href="index.jsp">Αρχική</a></li>
-    <li><a href="login.jsp">Login</a></li>
-    <li><a href="http://www.free-css.com/">Example Three</a></li>
+    <li><a href="login.jsp">Είσοδος</a></li>
+    <li><a href="register.jsp">Εγγραφή</a></li>
     <li><a href="http://www.free-css.com/">Example Four</a></li>
   </ul>
   
