@@ -34,10 +34,19 @@ if (session.getAttribute("error")!="0"){%>
 <tr><th><input type="submit" value="Go!"></th></tr>
 </table>
 </form>
-<%}else{ %>
-<div align="center">
-<h3>Η εγγραφή σας ολοκληρώθηκαι με επιτυχία. Μπορείτε να εισέλθεται από <a href="login.jsp">εδώ</a></h3>
+<%}else{ 
+	out.println("<br><br><div align=\"center\"><font color=green>Η εγγραφή σας ολοκληρώθηκαι επιτυχώς.<br>Αν δεν προωθηθήται αυτόματα, πατήστε <a href=index.jsp>εδώ</a></font>");
+%>
+
+<!--PROGRESS BAR-->
+<script type="text/javascript">
+CallJS('Demo()');
+delayRedirect();
+</script>
+<!--PROGRESS BAR-->
 </div>
-<%} %>
+<%
+}
+%>
 </div>
 <%@ include file="footer.jsp" %>
