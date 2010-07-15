@@ -1,4 +1,7 @@
-#Wed Jul 14 17:47:47 EEST 2010
+#Thu Jul 15 20:41:51 EEST 2010
 eclipse.preferences.version=1
 encoding//WebContent/header.jsp=UTF-8
+encoding//WebContent/left.jsp=UTF-8
+encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/logout.jsp=UTF-8
 encoding//WebContent/register.jsp=UTF-8

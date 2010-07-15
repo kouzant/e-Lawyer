@@ -39,4 +39,14 @@ public class Auxiliary {
     	}
     }
 
+  //Convert from integer to string
+    public String stringerize(int integer){
+    	try{
+    		String strResult=Integer.toString(integer);
+    		return strResult;
+    	}catch(NumberFormatException e){
+    		String strResult=null;
+    		return strResult;
+    	}
+    }
 }

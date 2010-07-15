@@ -1,12 +1,15 @@
 <!-- left menu -->
 <div id="content" class="clearfix">
     <div id="col_1">
-      <h2>Information</h2>
-      <%if (session.getAttribute("email")!=null){ 
-      	out.println("Hello"+session.getAttribute("email"));}%>
+      
+      <%if (session.getAttribute("login")=="1"){%>
+      <h2>Πίνακας Ελέγχου</h2><br>
+      <h4>Γεια σας, <%out.println(session.getAttribute("name"));%></h4>     	
       <ul id="subnav">
-        <li><a href="http://www.free-css.com/" >Lorem Ipsum</a></li>
-        <li><a href="http://www.free-css.com/" >Dylan Butler</a></li>
-        <li><a href="http://www.free-css.com/" >Example Three</a></li>
+		<li><a href="logout.jsp" >Έξοδος</a></li>
+        <li><a href="http://www.free-css.com/" >Πίνακας Ελέγχου</a></li>
       </ul>
+      <%}%>
+      <h2>Γνωμικά<h2>
+      Malakies.
     </div>
