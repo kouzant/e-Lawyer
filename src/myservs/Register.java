@@ -5,7 +5,6 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import java.security.*;
 /**
  * Servlet implementation class Register
  */
@@ -19,46 +18,13 @@ public class Register extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    public String shaDigest(String id){
-    	//SHA1 digest from id for unity
-		byte[] idBytes=id.getBytes();
-		try{
-			MessageDigest algorithm = MessageDigest.getInstance("SHA1");
-			algorithm.reset();
-			algorithm.update(idBytes);
-			byte messageDigest[] = algorithm.digest();
-			
-			StringBuffer hexString = new StringBuffer();
-			for (int i=0;i<messageDigest.length;i++){
-				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-			}
-			//String foo=messageDigest.toString();
-			id=hexString+"";
-			String idHashed=hexString.toString();
-			return idHashed;
-			}catch (NoSuchAlgorithmException nsae){
-				nsae.printStackTrace();
-			}
-			String error="Fatal Error: Could not produce hash digest";
-			return error;
-    }
-    
-    //Convert from string to integer
-    public int integerize(String string){
-    	try{
-    		int intResult=Integer.parseInt(string);
-    		return intResult;
-    	}catch(NumberFormatException e){
-    		int intResult=0;
-    		return intResult;
-    	}
-    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Auxiliary auxPoint = new Auxiliary();
 		String name=request.getParameter("name");
 		String surname=request.getParameter("surname");
 		String email=request.getParameter("email");
@@ -80,14 +46,14 @@ public class Register extends HttpServlet {
 		}else{
 			//Concatenate name, surname, email
 			String id=name.concat(surname).concat(email);
-			String idHash=shaDigest(id);
+			String idHash=auxPoint.shaDigest(id);
 			if (point.uniqueUser(idHash,email)!=1){
-				String passHash=shaDigest(password);
+				String passHash=auxPoint.shaDigest(password);
 				//Is Administrator
 				int isadmin=0;
 				System.out.println(idHash);
-				int intTelephone=integerize(telephone);
-				int intPostCode=integerize(postcode);
+				int intTelephone=auxPoint.integerize(telephone);
+				int intPostCode=auxPoint.integerize(postcode);
 				int val=point.registerUser(name,surname,email,passHash,idHash,intTelephone,address,intPostCode,isadmin);
 				
 				if (val!=0){

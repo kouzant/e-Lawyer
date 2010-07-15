@@ -67,6 +67,37 @@ public class DatabaseMethods {
 			closedb(con);
 		}		
 	}
+	
+	//Login method
+	public String[] identifyUser(String email, String password){
+		Connection con=null;
+		String userCredentials[]=new String[10];
+		
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String identifyQuery="SELECT * FROM users";
+			ResultSet result=stmt.executeQuery(identifyQuery);
+			
+			while (result.next()){
+				String storedEmail=result.getString(4);
+				String storedPass=result.getString(5);
+				if (email.equals(storedEmail) && password.equals(storedPass)){
+					for (int i=1;i<11;i++){
+						userCredentials[i-1]=result.getString(i);
+					}
+					break;
+				}
+			}
+			return userCredentials;
+		}catch(Exception e){
+			e.printStackTrace();
+			return userCredentials;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	//Method for closing the connection to db server
 	public void closedb(Connection con){
 		if (con != null){

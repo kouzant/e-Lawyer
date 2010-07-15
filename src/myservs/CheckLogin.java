@@ -1,10 +1,6 @@
 package myservs;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -27,18 +23,29 @@ public class CheckLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-			String username=request.getParameter("username");
-			String password=request.getParameter("password");
+			Auxiliary auxPoint = new Auxiliary();
+			String email=request.getParameter("email");
+			String paramPassword=request.getParameter("password");
+			String password=auxPoint.shaDigest(paramPassword);
 			
-			Boolean valid=true;
+			DatabaseMethods point = new DatabaseMethods();
+			String[] userCredentials=point.identifyUser(email, password);
+			Boolean valid=false;
 			
+			if (userCredentials[0]==null){
+				valid=false;
+			}else{
+				valid=true;
+			}
+			
+			System.out.println(valid);
 			if(!valid){
 				PrintWriter out=response.getWriter();
 				out.println("Wrong username or password");
 			}else{
 				HttpSession userSession=request.getSession(true);
 				userSession.setMaxInactiveInterval(10);
-				userSession.setAttribute("username", username);
+				userSession.setAttribute("email", email);
 				RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
 				if(rd!=null){
 					rd.forward(request, response);

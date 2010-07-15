@@ -4,7 +4,7 @@
 <form method="post" action="CheckLogin">
 <table border="0" align="left">
 <tr>
-<th><h2>Username:</h2> </th><th><input type="text" name="username"></th></tr>
+<th><h2>E-mail:</h2> </th><th><input type="text" name="email"></th></tr>
 <tr><th><h2>Password:</h2></th> <th><input type="password" name="password"></th></tr>
 <tr><th><input type="submit" value="Go!"></th><th><input type="reset" value="Reset"></th></tr>
 </table>
