@@ -7,11 +7,8 @@
 	if (session.getAttribute("falseLogin") == "1") {
 %>
 <font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font><br> <%
- 	}
- if (session.getAttribute("hideForm")=="1"){%>
-<font color="red"><br><br><u>Ο λογαριασμός σας κλειδώθηκε προσωρινά για 10 λεπτά λόγω επανηλημένων εσφαλμένων προσπαθειών.</u></font></div>
+ 	}%>
 
-<%}else{ %>
 <table border="0" align="left">
 <tr>
 <th><h4><b>E-mail:</b></h4> </th><th><input type="text" name="email"></th></tr>
@@ -20,5 +17,5 @@
 </table>
 </form>
 </div>
-<%} %>
+
 <%@ include file="footer.jsp" %>
