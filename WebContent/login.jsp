@@ -1,37 +1,24 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
 
-<div id="col_1">
+<div id="col_2">
 <form method="post" action="CheckLogin">
 <%
-	if (session.getAttribute("falselogin") == "1") {
+	if (session.getAttribute("falseLogin") == "1") {
 %>
-<font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font> <%
+<font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font><br> <%
  	}
- 	if (session.getAttribute("lockedLogin") == "1") {
- 		Object obj=session.getAttribute("lockedTimed");
- 		String strLockStart = obj.toString();
- 		try {
- 			long lLockStart = Long.parseLong(strLockStart.trim());
- 			long startTime = System.currentTimeMillis();
- 			String lockedLogin = (String) session.getAttribute("lockedLogin");
- 			long diffLock = startTime - lLockStart;
- 			if (diffLock < 1800000) {
- %> Thn gamhses!!!!!!!!<%
- 	}
- 		} catch (NumberFormatException e) {
- 			e.printStackTrace();
- 		}
- 	}
- %>
+ if (session.getAttribute("hideForm")=="1"){%>
+<font color="red"><br><br><u>Ο λογαριασμός σας κλειδώθηκε προσωρινά για 10 λεπτά λόγω επανηλημένων εσφαλμένων προσπαθειών.</u></font></div>
 
-
+<%}else{ %>
 <table border="0" align="left">
 <tr>
-<th><h2>E-mail:</h2> </th><th><input type="text" name="email"></th></tr>
-<tr><th><h2>Password:</h2></th> <th><input type="password" name="password"></th></tr>
+<th><h4><b>E-mail:</b></h4> </th><th><input type="text" name="email"></th></tr>
+<tr><th><h4><b>Password:</b></h4></th> <th><input type="password" name="password"></th></tr>
 <tr><th><input type="submit" value="Go!"></th><th><input type="reset" value="Reset"></th></tr>
 </table>
 </form>
 </div>
+<%} %>
 <%@ include file="footer.jsp" %>

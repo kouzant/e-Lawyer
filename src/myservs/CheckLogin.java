@@ -35,7 +35,8 @@ public class CheckLogin extends HttpServlet {
 			HttpSession userSession=request.getSession(true);
 			userSession.setMaxInactiveInterval(10);
 			userSession.setAttribute("login", "0");
-			//After 3 failed login attempts, login prompt lock for 30 minutes.
+			userSession.setAttribute("falseLogin", "1");
+			//After 3 failed login attempts, login prompt lock for 10 minutes.
 			Cookie[] userCookie = request.getCookies();
 			if (userCookie!=null){
 				for (int i=0;i<userCookie.length;i++){
@@ -43,16 +44,41 @@ public class CheckLogin extends HttpServlet {
 					if (c.getName().equals("falseLogNum")){
 						String strNumOfFalseLog=c.getValue();
 						int numOfFalseLogin=auxPoint.integerize(strNumOfFalseLog);
+						
 						if (numOfFalseLogin>=3){
-							userSession.setAttribute("lockedLogin", "1");
-							long startTime=System.currentTimeMillis();
-							Long Lobj = new Long(startTime);
-							System.out.println("Start time: "+Lobj);
-							userSession.setAttribute("lockedTimed", Lobj);
-							
+							long lockStarted=System.currentTimeMillis();
+							Long Lobj = new Long(lockStarted);
+							if (userSession.getAttribute("lockStarted")==null){
+								userSession.setAttribute("lockStarted", Lobj);	
+								userSession.setAttribute("lockInit", "1");
+							}
+							if (userSession.getAttribute("lockInit")=="1"){
+								long currentTime=System.currentTimeMillis();
+								Object obj=userSession.getAttribute("lockStarted");
+						 		String strLockStarted = obj.toString();
+						 		long lLockStarted = Long.parseLong(strLockStarted.trim());
+						 		
+						 		if (currentTime-lLockStarted < 6000){
+						 			userSession.setAttribute("hideForm", "1");
+						 		}else{
+						 			userSession.setAttribute("hideForm", "0");
+						 		}
+							}
 							numOfFalseLogin=1;
 						}else{
-							userSession.setAttribute("LockedLogin", "0");
+							long currentTime=System.currentTimeMillis();
+							if (userSession.getAttribute("lockStarted")!=null){
+								Object obj = userSession.getAttribute("lockStarted");
+								String strLockStarted = obj.toString();
+								long lLockStarted = Long.parseLong(strLockStarted.trim());
+
+								if (currentTime - lLockStarted < 6000) {
+									userSession.setAttribute("hideForm", "1");
+								} else {
+									userSession.setAttribute("hideForm", "0");
+									userSession.setAttribute("lockInit", "0");
+								}
+							}
 							numOfFalseLogin++;
 							String strFalseLogin=auxPoint.stringerize(numOfFalseLogin);
 							Cookie plusUserCookie = new Cookie("falseLogNum", strFalseLogin);
@@ -75,9 +101,9 @@ public class CheckLogin extends HttpServlet {
 		}else{
 			//Set the session attributes
 			HttpSession userSession=request.getSession(true);
-			//86400
-			userSession.setMaxInactiveInterval(10);
+			userSession.setMaxInactiveInterval(86400);
 			userSession.setAttribute("login", "1");
+			userSession.setAttribute("falseLogin", "0");
 			userSession.setAttribute("name", userCredentials[1]);
 			userSession.setAttribute("surname", userCredentials[2]);
 			userSession.setAttribute("email", userCredentials[3]);
