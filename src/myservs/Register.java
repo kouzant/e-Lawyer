@@ -50,7 +50,7 @@ public class Register extends HttpServlet {
 			if (point.uniqueUser(idHash,email)!=1){
 				String passHash=auxPoint.shaDigest(password);
 				//Is Administrator
-				int isadmin=0;
+				int isadmin=1;
 				System.out.println(idHash);
 				int intTelephone=auxPoint.integerize(telephone);
 				int intPostCode=auxPoint.integerize(postcode);

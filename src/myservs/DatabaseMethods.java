@@ -6,7 +6,7 @@ public class DatabaseMethods {
 
 	//Method for connecting to db server
 	public Connection connect(){
-		String url="jdbc:mysql://127.0.0.1/elawyer";
+		String url="jdbc:mysql://127.0.0.1/elawyer?characterEncoding=UTF-8";
 		Connection con=null;
 		try{
 			String driver="com.mysql.jdbc.Driver";

@@ -2,8 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
 <head>
 <title>e-Lawyer</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+
 </head>
 <body>
 
@@ -142,7 +143,8 @@ function delayRedirect(){
   <div id="header"> <a href="index.jsp"><img src="assets/images/logo_header.gif" alt="" width="203" height="102" class="logo" /></a> </div>
   <ul id="nav">
     <li><a href="index.jsp">Αρχική</a></li>
-    <% if (session.getAttribute("login")=="1"){%>
+    <%request.setCharacterEncoding("UTF-8"); 
+    if (session.getAttribute("login")=="1"){%>
     <li><a href="koko">koko</a></li>
     <li><a href="lala">lala</a></li>
     <%}else{ %>
