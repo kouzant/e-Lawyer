@@ -22,6 +22,8 @@ public class CheckLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		Auxiliary auxPoint = new Auxiliary();
 		String email=request.getParameter("email");
@@ -43,6 +45,8 @@ public class CheckLogin extends HttpServlet {
 			}
 		}else{
 			//Set the session attributes
+			
+			System.out.println("Login Name: "+userCredentials[1]);
 			HttpSession userSession=request.getSession(true);
 			userSession.setMaxInactiveInterval(86400);
 			userSession.setAttribute("login", "1");

@@ -24,6 +24,9 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
 		Auxiliary auxPoint = new Auxiliary();
 		String name=request.getParameter("name");
 		String surname=request.getParameter("surname");
@@ -34,13 +37,12 @@ public class Register extends HttpServlet {
 		String address=request.getParameter("address");
 		String postcode=request.getParameter("postcode");
 		HttpSession userSession=request.getSession(true);
-		userSession.setMaxInactiveInterval(5);
+		userSession.setMaxInactiveInterval(86400);
 		DatabaseMethods point = new DatabaseMethods();
 
 		//Unfilled required fields
 		if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty()){
 			userSession.setAttribute("error", "1");
-			
 		}else if (!password.equals(repassword)){
 			userSession.setAttribute("error", "2");
 		}else{
@@ -51,9 +53,9 @@ public class Register extends HttpServlet {
 				String passHash=auxPoint.shaDigest(password);
 				//Is Administrator
 				int isadmin=1;
-				System.out.println(idHash);
 				int intTelephone=auxPoint.integerize(telephone);
 				int intPostCode=auxPoint.integerize(postcode);
+				System.out.println("Register Name: "+name);
 				int val=point.registerUser(name,surname,email,passHash,idHash,intTelephone,address,intPostCode,isadmin);
 				
 				if (val!=0){

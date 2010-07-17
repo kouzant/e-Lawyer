@@ -1,8 +1,10 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- left menu -->
 <div id="content" class="clearfix">
     <div id="col_1">
       
-      <%if (session.getAttribute("login")=="1"){%>
+      <%
+      if (session.getAttribute("login")=="1"){%>
       <h2>Πίνακας Ελέγχου</h2><br>
       <h4>Γεια σας, <%out.println(session.getAttribute("name"));%></h4>     	
       <ul id="subnav">
