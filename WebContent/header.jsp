@@ -146,7 +146,7 @@ function delayRedirect(){
     <li><a href="index.jsp">Αρχική</a></li>
     <%request.setCharacterEncoding("UTF-8"); 
     if (session.getAttribute("login")=="1"){%>
-    <li><a href="koko">koko</a></li>
+    <li><a href="publish.jsp">Δημοσίευση Δεδικασμένου</a></li>
     <li><a href="lala">lala</a></li>
     <%}else{ %>
     <li><a href="login.jsp">Είσοδος</a></li>

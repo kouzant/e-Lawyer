@@ -25,6 +25,7 @@ public class CheckLogin extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		System.out.println(request.getContextPath());
 		Auxiliary auxPoint = new Auxiliary();
 		String email=request.getParameter("email");
 		String paramPassword=request.getParameter("password");

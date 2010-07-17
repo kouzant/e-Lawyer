@@ -15,6 +15,13 @@
 		<servlet-name>Register</servlet-name>
 		<servlet-class>myservs.Register</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Publish</display-name>
+		<servlet-name>Publish</servlet-name>
+		<servlet-class>myservs.Publish</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>CheckLogin</servlet-name>
 		<url-pattern>/CheckLogin</url-pattern>
@@ -22,6 +29,10 @@
 	<servlet-mapping>
 		<servlet-name>Register</servlet-name>
 		<url-pattern>/Register</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Publish</servlet-name>
+		<url-pattern>/Publish</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
