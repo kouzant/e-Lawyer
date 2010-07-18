@@ -52,10 +52,9 @@ public class Register extends HttpServlet {
 			if (point.uniqueUser(idHash,email)!=1){
 				String passHash=auxPoint.shaDigest(password);
 				//Is Administrator
-				int isadmin=1;
+				int isadmin=0;
 				int intTelephone=auxPoint.integerize(telephone);
 				int intPostCode=auxPoint.integerize(postcode);
-				System.out.println("Register Name: "+name);
 				int val=point.registerUser(name,surname,email,passHash,idHash,intTelephone,address,intPostCode,isadmin);
 				
 				if (val!=0){

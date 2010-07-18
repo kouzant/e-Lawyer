@@ -25,7 +25,6 @@ public class CheckLogin extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println(request.getContextPath());
 		Auxiliary auxPoint = new Auxiliary();
 		String email=request.getParameter("email");
 		String paramPassword=request.getParameter("password");
@@ -47,7 +46,6 @@ public class CheckLogin extends HttpServlet {
 		}else{
 			//Set the session attributes
 			
-			System.out.println("Login Name: "+userCredentials[1]);
 			HttpSession userSession=request.getSession(true);
 			userSession.setMaxInactiveInterval(86400);
 			userSession.setAttribute("login", "1");
