@@ -65,6 +65,7 @@ public class Publish extends HttpServlet {
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
 			//Check the form fields
+			
 			String title=request.getParameter("title");
 			String description=request.getParameter("description");
 			System.out.println("Title param: "+title);
