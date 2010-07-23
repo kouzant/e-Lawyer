@@ -3,6 +3,8 @@ package myservs;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,7 +15,6 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.multipart.*;
-
 /**
  * Servlet implementation class Publish
  */
@@ -65,28 +66,37 @@ public class Publish extends HttpServlet {
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
 			//Check the form fields
-			
-			String title=request.getParameter("title");
-			String description=request.getParameter("description");
-			System.out.println("Title param: "+title);
-			System.out.println("Description param: "+description);
-			if (title.isEmpty() || description.isEmpty()){
-				userSession.setAttribute("uploadFieldsEmpty", "1");
-				fieldsEmpty = true;
+			Map<String,String> paramMap = new HashMap<String,String>();
+			HttpServletRequest req = request;
+			//Gamaei to upload arxeion. Comment gia na pai3ei sosta
+			MultipartParser mp = new MultipartParser(req,1*1024*1024);
+			Part part;
+			while((part=mp.readNextPart())!=null){
+				String name = part.getName();
+				if(part.isParam()){
+					ParamPart paramPart = (ParamPart) part;
+					String value=paramPart.getStringValue();
+					if (value.isEmpty()){
+						fieldsEmpty=true;
+						System.out.println("Fields Empty");
+					}
+					paramMap.put(name, value);
+				}
 			}
 			//Parse the request
-			if (fieldsEmpty!=true){
-				@SuppressWarnings("rawtypes")
+			if (fieldsEmpty==false){
 				List items = uploadHandler.parseRequest(request);
-				@SuppressWarnings("rawtypes")
 				Iterator itr = items.iterator();
+				System.out.println("Iterator test: "+itr.toString());
 				while (itr.hasNext()) {
+					System.out.println("baboubi");
 					FileItem item = (FileItem) itr.next();
 					boolean isFormField = item.isFormField();
 					// Handle form fields
 					if (isFormField) {
 						System.out.println("Regular Field");
 					} else {
+						System.out.println("File Handling");
 						// Handle uploaded file
 						// Write file to ultimate destination
 						File file = new File("/opt/uploads", item.getName());
@@ -95,6 +105,8 @@ public class Publish extends HttpServlet {
 						userSession.setAttribute("fileUpload", "1");
 					}
 				}
+			}else{
+				userSession.setAttribute("emptyFields", "1");
 			}
 		}catch(FileUploadException e){
 			e.printStackTrace();
