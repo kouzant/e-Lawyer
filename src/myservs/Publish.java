@@ -66,6 +66,7 @@ public class Publish extends HttpServlet {
 		try{
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
+			boolean validContent=true;
 			//Check the form fields
 			Map<String,String> paramMap = new HashMap<String,String>();
 			
@@ -80,6 +81,7 @@ public class Publish extends HttpServlet {
 				// Handle form fields
 				if (isFormField) {
 					System.out.println(item.getFieldName());
+					paramMap.put(item.getFieldName(), item.getString());
 
 					if ((item.getString().isEmpty()) && (item.getFieldName().equals("description"))){
 						System.out.println("Empty Field");
@@ -92,8 +94,17 @@ public class Publish extends HttpServlet {
 					if (item.getName().isEmpty()){
 						fieldsEmpty=true;
 					}
+					String contentType=item.getContentType();
+					String permittedContentType="application/pdf";
+					if (!contentType.contentEquals(permittedContentType)){
+						validContent=false;
+					}
 					
-					if (fieldsEmpty==false){
+					if (fieldsEmpty==true){
+						userSession.setAttribute("uploadFieldsEmpty", "1");
+					}else if (validContent==false){
+						userSession.setAttribute("notValidContent", "1");
+					}else{
 						System.out.println("File Handling");
 						// Handle uploaded file
 						// Write file to ultimate destination
@@ -101,10 +112,7 @@ public class Publish extends HttpServlet {
 						File file = new File("/opt/uploads", item.getName());
 						item.write(file);
 
-						userSession.setAttribute("fileUpload", "1");
-					}else{
-						userSession.setAttribute("uploadFieldsEmpty", "1");
-					}
+						userSession.setAttribute("fileUpload", "1");					}
 				}
 			}
 		}catch(FileUploadException e){

@@ -11,13 +11,15 @@ session.setAttribute("fileUpload","0");
 }
 if (session.getAttribute("uploadFieldsEmpty")=="1"){%>
 <font color=red>Συμπληρώστε όλα τα απαιτούμενα πεδία.</font>
-<% } %>
+<%session.setAttribute("uploadFieldsEmpty","0"); } 
+if (session.getAttribute("notValidContent")=="1"){%>
+<font color=red>Το αρχείο δεν έχει τον κατάλληλο τύπο.</font>
+<%session.setAttribute("notValidContent","0"); } %>
 <form method="post" action="Publish" method="post" enctype="multipart/form-data">
 <table border="0" align="left">
 <tr>
-<input type="hidden" name="hiddenfield1" value="ok">
 <th><h4>* Τίτλος:</h4> </th><th><input type="text" name="title"></th></tr>
-<tr><th><h4>* Περιγραφή:</h4></th> <th><input type="text" name="description"></th></tr>
+<tr><th><h4>* Περιγραφή:</h4></th> <th><textarea name="description" cols="30" rows="5"></textarea></th></tr>
 <tr><th><h4>* Αρχείο (σε μορφή pdf):</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
 <tr><th><input type="submit" value="Go!"></th></tr>
