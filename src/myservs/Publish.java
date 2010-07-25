@@ -66,28 +66,18 @@ public class Publish extends HttpServlet {
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
 			//Check the form fields
+			Auxiliary point = new Auxiliary();
 			Map<String,String> paramMap = new HashMap<String,String>();
-			HttpServletRequest req = request;
-			//Gamaei to upload arxeion. Comment gia na pai3ei sosta
-			MultipartParser mp = new MultipartParser(req,1*1024*1024);
-			Part part;
-			while((part=mp.readNextPart())!=null){
-				String name = part.getName();
-				if(part.isParam()){
-					ParamPart paramPart = (ParamPart) part;
-					String value=paramPart.getStringValue();
-					if (value.isEmpty()){
-						fieldsEmpty=true;
-						System.out.println("Fields Empty");
-					}
-					paramMap.put(name, value);
-				}
+			paramMap=point.multiValues(request);
+			
+			if (paramMap.get("description").isEmpty()){
+				System.out.println("Empty description field");
+				fieldsEmpty=true;
 			}
 			//Parse the request
 			if (fieldsEmpty==false){
 				List items = uploadHandler.parseRequest(request);
 				Iterator itr = items.iterator();
-				System.out.println("Iterator test: "+itr.toString());
 				while (itr.hasNext()) {
 					System.out.println("baboubi");
 					FileItem item = (FileItem) itr.next();
