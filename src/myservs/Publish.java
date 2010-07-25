@@ -36,6 +36,7 @@ public class Publish extends HttpServlet {
         if (!tmpDir.isDirectory()){
         	System.out.println(TMP_DIR_PATH + "is not a directory");
         }
+        
         /*String realPath=getServletContext().getContextPath();
         System.out.println("Context Path: "+realPath);
         System.out.println(realPath);
@@ -50,7 +51,7 @@ public class Publish extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
@@ -66,37 +67,49 @@ public class Publish extends HttpServlet {
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
 			//Check the form fields
-			Auxiliary point = new Auxiliary();
 			Map<String,String> paramMap = new HashMap<String,String>();
-			paramMap=point.multiValues(request);
+			/*paramMap=point.multiValues(request);
 			
 			if (paramMap.get("description").isEmpty()){
 				System.out.println("Empty description field");
 				fieldsEmpty=true;
-			}
+			}*/
 			//Parse the request
-			if (fieldsEmpty==false){
-				List items = uploadHandler.parseRequest(request);
-				Iterator itr = items.iterator();
-				while (itr.hasNext()) {
-					System.out.println("baboubi");
-					FileItem item = (FileItem) itr.next();
-					boolean isFormField = item.isFormField();
-					// Handle form fields
-					if (isFormField) {
-						System.out.println("Regular Field");
-					} else {
+			
+			List items = uploadHandler.parseRequest(request);
+			Iterator itr = items.iterator();
+			while (itr.hasNext()) {
+				FileItem item = (FileItem) itr.next();
+				boolean isFormField = item.isFormField();
+				// Handle form fields
+				if (isFormField) {
+					System.out.println(item.getFieldName());
+
+					if ((item.getString().isEmpty()) && (item.getFieldName().equals("description"))){
+						System.out.println("Empty Field");
+						fieldsEmpty=true;
+					}
+				}else{
+					System.out.println("File Name: "+item.getName());
+					System.out.println("File Type: "+item.getContentType());
+
+					if (item.getName().isEmpty()){
+						fieldsEmpty=true;
+					}
+					
+					if (fieldsEmpty==false){
 						System.out.println("File Handling");
 						// Handle uploaded file
 						// Write file to ultimate destination
+						System.out.println(item.getName());
 						File file = new File("/opt/uploads", item.getName());
 						item.write(file);
 
 						userSession.setAttribute("fileUpload", "1");
+					}else{
+						userSession.setAttribute("uploadFieldsEmpty", "1");
 					}
 				}
-			}else{
-				userSession.setAttribute("emptyFields", "1");
 			}
 		}catch(FileUploadException e){
 			e.printStackTrace();
