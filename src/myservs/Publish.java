@@ -68,15 +68,11 @@ public class Publish extends HttpServlet {
 			boolean fieldsEmpty = false;
 			//Check the form fields
 			Map<String,String> paramMap = new HashMap<String,String>();
-			/*paramMap=point.multiValues(request);
 			
-			if (paramMap.get("description").isEmpty()){
-				System.out.println("Empty description field");
-				fieldsEmpty=true;
-			}*/
 			//Parse the request
-			
+			@SuppressWarnings("rawtypes")
 			List items = uploadHandler.parseRequest(request);
+			@SuppressWarnings("rawtypes")
 			Iterator itr = items.iterator();
 			while (itr.hasNext()) {
 				FileItem item = (FileItem) itr.next();
