@@ -4,6 +4,8 @@
 
 
 <div id="col_2">
+<h2>Είσοδος Εγγεγραμμένου Χρήστη</h2>
+<img border="0" src="assets/images/spacer.gif"><br><br>
 <form method="post" action="CheckLogin">
 <%
 	if (session.getAttribute("falseLogin") == "1") {

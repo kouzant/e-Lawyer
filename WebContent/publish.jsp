@@ -3,7 +3,8 @@
 <%@ include file="left.jsp" %>
 <%if (session.getAttribute("login")=="1"){ %>
 <div id="col_2">
-<h2>Δημοσίευση Δεδικασμένης Υπόθεσης.</h2><br><br>
+<h2>Δημοσίευση Δεδικασμένης Υπόθεσης</h2>
+<img border="0" src="assets/images/spacer.gif"><br><br>
 <%if (session.getAttribute("fileUpload")=="1"){%>
 <font color=green>Το αρχείο ανέβηκε επιτυχώς.</font>
 <%

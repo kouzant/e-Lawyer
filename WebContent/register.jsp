@@ -21,6 +21,8 @@ if (session.getAttribute("error")=="4"){
 <font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
 <%} 
 if (session.getAttribute("error")!="0"){%>
+<h2>Εγγραφή Νέου Χρήστη</h2>
+<img border="0" src="assets/images/spacer.gif"><br><br>
 <form method="post" action="Register">
 <table border="0" align="left">
 <tr>
