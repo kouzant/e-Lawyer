@@ -51,8 +51,8 @@ public class Publish extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 		//Set the size threshold.
