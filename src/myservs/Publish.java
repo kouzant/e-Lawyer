@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.oreilly.servlet.multipart.*;
 /**
  * Servlet implementation class Publish
  */
@@ -67,6 +66,7 @@ public class Publish extends HttpServlet {
 			HttpSession userSession = request.getSession();
 			boolean fieldsEmpty = false;
 			boolean validContent=true;
+			boolean overSize=false;
 			//Check the form fields
 			Map<String,String> paramMap = new HashMap<String,String>();
 			
@@ -80,17 +80,12 @@ public class Publish extends HttpServlet {
 				boolean isFormField = item.isFormField();
 				// Handle form fields
 				if (isFormField) {
-					System.out.println(item.getFieldName());
 					paramMap.put(item.getFieldName(), item.getString());
 
 					if ((item.getString().isEmpty()) && (item.getFieldName().equals("description"))){
-						System.out.println("Empty Field");
 						fieldsEmpty=true;
 					}
 				}else{
-					System.out.println("File Name: "+item.getName());
-					System.out.println("File Type: "+item.getContentType());
-
 					if (item.getName().isEmpty()){
 						fieldsEmpty=true;
 					}
@@ -100,19 +95,33 @@ public class Publish extends HttpServlet {
 						validContent=false;
 					}
 					
+					if (item.getSize()>10000000){
+						overSize=true;
+					}
 					if (fieldsEmpty==true){
 						userSession.setAttribute("uploadFieldsEmpty", "1");
 					}else if (validContent==false){
 						userSession.setAttribute("notValidContent", "1");
+					}else if(overSize==true){
+						userSession.setAttribute("overSize", "1");
 					}else{
-						System.out.println("File Handling");
 						// Handle uploaded file
 						// Write file to ultimate destination
-						System.out.println(item.getName());
 						File file = new File("/opt/uploads", item.getName());
 						item.write(file);
-
-						userSession.setAttribute("fileUpload", "1");					}
+						userSession.setAttribute("fileUpload", "1");
+						//Write to database
+						String title=paramMap.get("title");
+						String description=paramMap.get("description");
+						String location="/opt/uploads/"+item.getName();
+						String userid=userSession.getAttribute("id").toString();
+						System.out.println("Title: "+title+"\nDesc: "+description+"\nlocation: "+location+"\nUser id: "+userid);
+						DatabaseMethods dbPoint = new DatabaseMethods();
+						int result=dbPoint.uploadTable(title, description, location, userid);
+						if (result==0){
+							userSession.setAttribute("dbFailure", "1");
+						}
+					}
 				}
 			}
 		}catch(FileUploadException e){

@@ -14,7 +14,13 @@ if (session.getAttribute("uploadFieldsEmpty")=="1"){%>
 <%session.setAttribute("uploadFieldsEmpty","0"); } 
 if (session.getAttribute("notValidContent")=="1"){%>
 <font color=red>Το αρχείο δεν έχει τον κατάλληλο τύπο.</font>
-<%session.setAttribute("notValidContent","0"); } %>
+<%session.setAttribute("notValidContent","0"); }
+if (session.getAttribute("overSize")=="1"){%>
+<font color=red>Το μέγεθος του αρχείου σας είναι πολύ μεγαλύτερο από το επιτρεπτό (10MB).</font>
+<%session.setAttribute("overSize","0"); } 
+if (session.getAttribute("dbFailure")=="1"){%>
+<font color=red>Database Error. Επικοινωνήστε με τον διαχειριστή.</font>
+<%session.setAttribute("dbFailure","0"); } %>
 <form method="post" action="Publish" method="post" enctype="multipart/form-data">
 <table border="0" align="left">
 <tr>

@@ -40,6 +40,22 @@ public class DatabaseMethods {
 		}
 	}
 	
+	public int uploadTable(String title, String description, String location, String userid){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String upQuery="INSERT INTO uploads (title,description,location,userid) VALUES ('"+title+"','"+description+"','"+location+"','"+userid+"')";
+			int result=stmt.executeUpdate(upQuery);
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
+			int result=0;
+			return result;
+		}finally{
+			closedb(con);
+		}
+	}
 	//Method for identifying unique users
 	public int uniqueUser(String id, String email){
 		Connection con=null;
