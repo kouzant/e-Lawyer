@@ -4,7 +4,7 @@
 <%@ include file="left.jsp" %>
 <div id="col_2">
 <h2>Δεδικασμένες Υποθέσεις</h2>
-<img border="0" src="assets/images/spacer.gif"><br><br>
+<img border="0" src="assets/images/spacer.gif"><br>
 <form method="post">
 <input type="hidden" id="buttonPushed">
 
@@ -29,10 +29,10 @@ try{
 	<%con2=DriverManager.getConnection(url,"elawyer","elawyer");
 	Statement stmt2=con2.createStatement();
 	ResultSet result2=stmt2.executeQuery("SELECT name,surname FROM users WHERE id='"+result.getString(4)+"'");
-	while (result2.next()){%><b><%
+	while (result2.next()){%><div class="divAuthor"><b><%
 	out.print(result2.getString(1));
 	out.print("&nbsp;");
-	out.print(result2.getString(2)); %></b>
+	out.print(result2.getString(2)); %></b></div>
 	
 	<%}
 	}

@@ -36,7 +36,7 @@ public class Publish extends HttpServlet {
         	System.out.println(TMP_DIR_PATH + "is not a directory");
         }
         
-        /*String realPath=getServletContext().getContextPath();
+        /*String realPath=getServletContext().getRealPath(DESTINATION_DIR_PATH);
         System.out.println("Context Path: "+realPath);
         System.out.println(realPath);
         destinationDir = new File(realPath);
@@ -107,7 +107,7 @@ public class Publish extends HttpServlet {
 					}else{
 						// Handle uploaded file
 						// Write file to ultimate destination
-						File file = new File("/opt/uploads", item.getName());
+						File file = new File(getServletContext().getRealPath(DESTINATION_DIR_PATH), item.getName());
 						item.write(file);
 						userSession.setAttribute("fileUpload", "1");
 						//Write to database
@@ -117,9 +117,8 @@ public class Publish extends HttpServlet {
 						String isoDescription=paramMap.get("description");
 						//Convert to UTF-8
 						String description=new String(isoDescription.getBytes("ISO8859_1"),"UTF-8");
-						String location="/opt/uploads/"+item.getName();
+						String location=getServletContext().getRealPath(DESTINATION_DIR_PATH)+item.getName();
 						String userid=userSession.getAttribute("id").toString();
-						System.out.println("Title: "+title+"\nDesc: "+description+"\nlocation: "+location+"\nUser id: "+userid);
 						DatabaseMethods dbPoint = new DatabaseMethods();
 						int result=dbPoint.uploadTable(title,description,location,userid);
 						if (result==0){
