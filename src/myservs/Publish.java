@@ -36,13 +36,6 @@ public class Publish extends HttpServlet {
         	System.out.println(TMP_DIR_PATH + "is not a directory");
         }
         
-        /*String realPath=getServletContext().getRealPath(DESTINATION_DIR_PATH);
-        System.out.println("Context Path: "+realPath);
-        System.out.println(realPath);
-        destinationDir = new File(realPath);
-        if (!destinationDir.isDirectory()){
-        	System.out.println(DESTINATION_DIR_PATH + "is not a directory");
-        }*/
     }
 
 	/**
@@ -117,7 +110,7 @@ public class Publish extends HttpServlet {
 						String isoDescription=paramMap.get("description");
 						//Convert to UTF-8
 						String description=new String(isoDescription.getBytes("ISO8859_1"),"UTF-8");
-						String location=getServletContext().getRealPath(DESTINATION_DIR_PATH)+item.getName();
+						String location="/e-Lawyer/uploads/"+item.getName();
 						String userid=userSession.getAttribute("id").toString();
 						DatabaseMethods dbPoint = new DatabaseMethods();
 						int result=dbPoint.uploadTable(title,description,location,userid);

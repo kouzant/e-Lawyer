@@ -23,8 +23,11 @@ try{
 	con=DriverManager.getConnection(url,"elawyer","elawyer");
 	Statement stmt=con.createStatement();
 	ResultSet result=stmt.executeQuery("SELECT title,description,location,userid FROM uploads");
+	
 	while(result.next()){%>
-	<h3><%out.print(result.getString(1));%></h3>
+	<table border="0" align="center">
+	<tr><th><h3><%out.print(result.getString(1));%></h3></th><th><a href="<%out.print(result.getString(3));%>">[Download]</a></th></tr>
+	</table>
 	<blockquote><%out.print(result.getString(2)); %></blockquote>
 	<%con2=DriverManager.getConnection(url,"elawyer","elawyer");
 	Statement stmt2=con2.createStatement();
