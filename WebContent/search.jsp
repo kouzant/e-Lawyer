@@ -24,15 +24,15 @@ try{
 	Statement stmt=con.createStatement();
 	ResultSet result=stmt.executeQuery("SELECT title,description,location,userid FROM uploads");
 	while(result.next()){%>
-	<b><%out.print(result.getString(1));%></b><br>
+	<h3><%out.print(result.getString(1));%></h3>
 	<blockquote><%out.print(result.getString(2)); %></blockquote>
-	<h3><%con2=DriverManager.getConnection(url,"elawyer","elawyer");
+	<%con2=DriverManager.getConnection(url,"elawyer","elawyer");
 	Statement stmt2=con2.createStatement();
 	ResultSet result2=stmt2.executeQuery("SELECT name,surname FROM users WHERE id='"+result.getString(4)+"'");
-	while (result2.next()){
+	while (result2.next()){%><b><%
 	out.print(result2.getString(1));
 	out.print("&nbsp;");
-	out.print(result2.getString(2)); %></h3>
+	out.print(result2.getString(2)); %></b>
 	
 	<%}
 	}
@@ -42,6 +42,14 @@ try{
 	if (con != null){
 		try{
 			con.close();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	if (con2 != null){
+		try{
+			con2.close();
 		}catch (Exception e){
 			e.printStackTrace();
 		}

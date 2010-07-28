@@ -111,13 +111,17 @@ public class Publish extends HttpServlet {
 						item.write(file);
 						userSession.setAttribute("fileUpload", "1");
 						//Write to database
-						String title=paramMap.get("title");
-						String description=paramMap.get("description");
+						String isoTitle=paramMap.get("title");
+						//Convert to UTF-8
+						String title=new String(isoTitle.getBytes("ISO8859_1"),"UTF-8");
+						String isoDescription=paramMap.get("description");
+						//Convert to UTF-8
+						String description=new String(isoDescription.getBytes("ISO8859_1"),"UTF-8");
 						String location="/opt/uploads/"+item.getName();
 						String userid=userSession.getAttribute("id").toString();
 						System.out.println("Title: "+title+"\nDesc: "+description+"\nlocation: "+location+"\nUser id: "+userid);
 						DatabaseMethods dbPoint = new DatabaseMethods();
-						int result=dbPoint.uploadTable(title, description, location, userid);
+						int result=dbPoint.uploadTable(title,description,location,userid);
 						if (result==0){
 							userSession.setAttribute("dbFailure", "1");
 						}
