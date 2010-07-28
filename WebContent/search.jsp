@@ -2,6 +2,7 @@
 <%@page import="java.sql.*" %>
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
+
 <div id="col_2">
 <h2>Δεδικασμένες Υποθέσεις</h2>
 <img border="0" src="assets/images/spacer.gif"><br>
@@ -9,18 +10,11 @@
 <input type="hidden" id="buttonPushed">
 
 <%
-String url="jdbc:mysql://127.0.0.1/elawyer?useUnicode=true&characterEncoding=UTF8";
 Connection con=null;
-Connection con2=null;
+Connection con3=null;
 
 try{
-	String driver="com.mysql.jdbc.Driver";
-	Class.forName(driver).newInstance();
-}catch (Exception e){
-	System.out.println("Failed to load the JDBC driver");
-}
-try{
-	con=DriverManager.getConnection(url,"elawyer","elawyer");
+	con=dbpoint.connect();
 	Statement stmt=con.createStatement();
 	ResultSet result=stmt.executeQuery("SELECT title,description,location,userid FROM uploads");
 	
@@ -29,35 +23,21 @@ try{
 	<tr><th><h3><%out.print(result.getString(1));%></h3></th><th><a href="<%out.print(result.getString(3));%>">[Download]</a></th></tr>
 	</table>
 	<blockquote><%out.print(result.getString(2)); %></blockquote>
-	<%con2=DriverManager.getConnection(url,"elawyer","elawyer");
-	Statement stmt2=con2.createStatement();
-	ResultSet result2=stmt2.executeQuery("SELECT name,surname FROM users WHERE id='"+result.getString(4)+"'");
-	while (result2.next()){%><div class="divAuthor"><b><%
-	out.print(result2.getString(1));
+	<%con3=dbpoint.connect();
+	Statement stmt3=con3.createStatement();
+	ResultSet result3=stmt3.executeQuery("SELECT name,surname FROM users WHERE id='"+result.getString(4)+"'");
+	while (result3.next()){%><div class="divAuthor"><b><%
+	out.print(result3.getString(1));
 	out.print("&nbsp;");
-	out.print(result2.getString(2)); %></b></div>
+	out.print(result3.getString(2)); %></b></div>
 	
 	<%}
 	}
 }catch (Exception e){
 	e.printStackTrace();
 }finally{
-	if (con != null){
-		try{
-			con.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-	}
-	if (con2 != null){
-		try{
-			con2.close();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		
-	}
+	dbpoint.closedb(con);
+	dbpoint.closedb(con3);
 }
 %>
 
