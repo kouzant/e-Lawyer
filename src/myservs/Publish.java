@@ -22,7 +22,6 @@ public class Publish extends HttpServlet {
 	private static final String TMP_DIR_PATH = "/tmp";
 	private File tmpDir;
 	private static final String DESTINATION_DIR_PATH = "/uploads";
-	private File destinationDir;
        
     /**
      * @see HttpServlet#HttpServlet()
