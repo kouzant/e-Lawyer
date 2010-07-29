@@ -29,7 +29,7 @@ try{
 	while (result3.next()){%><div class="divAuthor"><b><%
 	out.print(result3.getString(1));
 	out.print("&nbsp;");
-	out.print(result3.getString(2)); %></b></div>
+	out.print(result3.getString(2)); %></b></div><p><hr>
 	
 	<%}
 	}
