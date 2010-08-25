@@ -145,6 +145,36 @@ function delayRedirect(){
 </script>
 <!--PROGRESS BAR-->
 
+<!-- Make visible search field at search.jsp -->
+<script language=javascript type='text/javascript'>
+function hidediv() {
+if (document.getElementById) { // DOM3 = IE5, NS6
+document.getElementById('searchDiv').style.visibility = 'hidden';
+}
+else {
+if (document.layers) { // Netscape 4
+document.hideShow.visibility = 'hidden';
+}
+else { // IE 4
+document.all.hideShow.style.visibility = 'hidden';
+}
+}
+}
+
+function showdiv() {
+if (document.getElementById) { // DOM3 = IE5, NS6
+document.getElementById('searchDiv').style.visibility = 'visible';
+}
+else {
+if (document.layers) { // Netscape 4
+document.hideShow.visibility = 'visible';
+}
+else { // IE 4
+document.all.hideShow.style.visibility = 'visible';
+}
+}
+}
+</script> 
 <!-- Top menu -->
 <div id="wrapper">
   <div id="header"> <a href="index.jsp"><img src="assets/images/logo_header.gif" alt="" width="203" height="102" class="logo" /></a> </div>

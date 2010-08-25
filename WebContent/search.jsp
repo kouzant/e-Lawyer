@@ -6,9 +6,18 @@
 <div id="col_2">
 <h2>Δεδικασμένες Υποθέσεις</h2>
 <img border="0" src="assets/images/spacer.gif"><br>
+<a href="javascript:showdiv()">Αναζήτηση</a>
+<a href="javascript:hidediv()">hide</a>
+
 <form method="post">
 <input type="hidden" id="buttonPushed">
 
+<div id="searchDiv" style="visibility:hidden;">
+slkjdfkjsdkjfkjkdsjkfjkdsjf
+sdskdfhkjhdsohfihidh<br>
+ksdjfkjdskf<br>
+kjhfkdjfdjf<br>
+</div>
 <%
 Connection con=null;
 Connection con3=null;
