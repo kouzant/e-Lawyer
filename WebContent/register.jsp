@@ -35,7 +35,7 @@ if (session.getAttribute("error")!="0"){%>
 <tr><th><h4>&nbsp;&nbsp;Διεύθυνση:</h4></th> <th><input type="text" name="address" value="<%if (session.getAttribute("address")!=null) out.println(session.getAttribute("address"));%>"></th></tr>
 <tr><th><h4>&nbsp;&nbsp;Ταχ. Κωδικός:</h4></th> <th><input type="text" name="postcode" value="<%if (session.getAttribute("postcode")!=null) out.println(session.getAttribute("postcode"));%>"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
-<tr><th><input type="submit" value="Go!"></th></tr>
+<tr><th><input type="submit" value="" style="background:url(assets/images/register.png);width:70px;height:25px;border:0;"></th></tr>
 </table>
 </form>
 <%}else{ 
