@@ -7,16 +7,16 @@
 <h2>Δεδικασμένες Υποθέσεις</h2>
 <img border="0" src="assets/images/spacer.gif"><br>
 <a href="javascript:showdiv()">Αναζήτηση</a>
-<a href="javascript:hidediv()">hide</a>
 
 <form method="post">
 <input type="hidden" id="buttonPushed">
 
 <div id="searchDiv" style="visibility:hidden;">
-slkjdfkjsdkjfkjkdsjkfjkdsjf
-sdskdfhkjhdsohfihidh<br>
-ksdjfkjdskf<br>
-kjhfkdjfdjf<br>
+<form method="post" action="preview.jsp">
+<input type="hidden" name="enableSearch">
+Λέξη κλειδί: <input type="text" name="searchString">
+<input type="submit" value="Search">
+</form>
 </div>
 <%
 Connection con=null;
@@ -27,10 +27,20 @@ int totalEntries;
 try{
 	con=dbpoint.connect();
 	Statement stmt=con.createStatement();
-	ResultSet result=stmt.executeQuery("SELECT count(*) FROM uploads");
+	ResultSet result;
+	if(request.getParameter("enableSearch")!=null){
+		String searchString=request.getParameter("searchString");
+		result=stmt.executeQuery("SELECT count(*) FROM uploads WHERE title LIKE \'%"+searchString+"%\' OR description LIKE \'%"+searchString+"%\'");
+	}else{
+		result=stmt.executeQuery("SELECT count(*) FROM uploads");
+	}
 	result.next();
 	totalEntries=result.getInt(1);
-	
+	if(totalEntries==0){%>
+	<div align="center">
+	<font color="red"><u>Δεν βρέθηκε εγγραφή με τα κριτήρια που δώσατε.</u></font><br>
+	</div>
+	<%}
 	totalEntries=totalEntries+5;
 	
 	int pageNumber=0;
@@ -46,9 +56,16 @@ try{
 	int offset=(pageNumber-1)*entriesPerPage;
 	con3=dbpoint.connect();
 	Statement stmt3=con3.createStatement();
-	ResultSet result3=stmt3.executeQuery("SELECT title,description,location,userid FROM uploads LIMIT "+offset+","+entriesPerPage);
+	ResultSet result3;
+	if(request.getParameter("searchString")!=null){
+		String searchString=request.getParameter("searchString");
+		result3=stmt3.executeQuery("SELECT title,description,location,userid FROM uploads WHERE title LIKE \'%"+searchString+"%\' OR description LIKE \'%"+searchString+"%\' LIMIT "+offset+","+entriesPerPage);
+		
+	}else{
+		result3=stmt3.executeQuery("SELECT title,description,location,userid FROM uploads LIMIT "+offset+","+entriesPerPage);
+	}
 	
-	%><p><div align="right">[<%
+	%><div align="right">[<%
 	for(i=1;i<=totalPages;i++){
 		if(i==pageNumber){
 			out.println(i);

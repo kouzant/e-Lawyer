@@ -17,7 +17,7 @@
 <tr>
 <th><h4><b>E-mail:</b></h4> </th><th><input type="text" name="email"></th></tr>
 <tr><th><h4><b>Password:</b></h4></th> <th><input type="password" name="password"></th></tr>
-<tr><th><input type="submit" value="" style="background:url(assets/images/enter.png);width:70px;height:26px;border:0;"></th><th><input type="reset" value="Reset"></th></tr>
+<tr><th><input type="submit" value="" style="background:url(assets/images/enter.png);width:70px;height:26px;border:0;"></th></tr>
 </table>
 </form>
 </div>

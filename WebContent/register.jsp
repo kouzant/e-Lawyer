@@ -19,7 +19,13 @@ if (session.getAttribute("error")=="3"){
 if (session.getAttribute("error")=="4"){
 %>
 <font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
-<%} 
+<%}
+if(session.getAttribute("email")!=null){%>
+<div align="center">
+<font color="red"><u>Είστε ήδη εγγεγραμμένος στο σύστημα. Αν χρησιμοποιήτε κοινόχρηστο λογαριασμό και θέλετε όντως να εγγραφήτε, καθαρίστε το Ιστορικό του περιηγητή σας.</u></font>
+</div>
+<%
+}else{
 if (session.getAttribute("error")!="0"){%>
 <h2>Εγγραφή Νέου Χρήστη</h2>
 <img border="0" src="assets/images/spacer.gif"><br><br>
@@ -50,6 +56,7 @@ delayRedirect();
 <!--PROGRESS BAR-->
 </div>
 <%
+}
 }
 %>
 </div>

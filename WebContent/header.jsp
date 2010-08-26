@@ -180,7 +180,7 @@ document.all.hideShow.style.visibility = 'visible';
   <div id="header"> <a href="index.jsp"><img src="assets/images/logo_header.gif" alt="" width="203" height="102" class="logo" /></a> </div>
   <ul id="nav">
     <li><a href="index.jsp">Αρχική</a></li>
-    <li><a href="search.jsp">Αναζήτηση</a></li>
+    <li><a href="preview.jsp">Προβολή</a></li>
     <%request.setCharacterEncoding("UTF-8"); 
     if (session.getAttribute("login")=="1"){%>
     <li><a href="publish.jsp">Δημοσίευση Δεδικασμένου</a></li>
