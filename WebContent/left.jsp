@@ -40,7 +40,7 @@
      		<h4>Γεια σας, <%out.println(session.getAttribute("name"));%></h4>     	
       		<ul id="subnav">
 				<li><a href="logout.jsp" >Έξοδος</a></li>
-        		<li><a href="http://www.free-css.com/" >Πίνακας Ελέγχου</a></li>
+        		<li><a href="cpanel.jsp" >Πίνακας Ελέγχου</a></li>
       		</ul>
       <%} %>
     </div>

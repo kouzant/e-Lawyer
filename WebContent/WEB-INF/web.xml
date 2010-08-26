@@ -22,6 +22,13 @@
 		<servlet-name>Publish</servlet-name>
 		<servlet-class>myservs.Publish</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ChangePersonalData</display-name>
+		<servlet-name>ChangePersonalData</servlet-name>
+		<servlet-class>myservs.ChangePersonalData</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>CheckLogin</servlet-name>
 		<url-pattern>/CheckLogin</url-pattern>
@@ -33,6 +40,10 @@
 	<servlet-mapping>
 		<servlet-name>Publish</servlet-name>
 		<url-pattern>/Publish</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangePersonalData</servlet-name>
+		<url-pattern>/ChangePersonalData</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

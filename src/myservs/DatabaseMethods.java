@@ -40,6 +40,23 @@ public class DatabaseMethods {
 		}
 	}
 	
+	public int updateUser(String name, String surname, String email, String password, String id, int telephone, String address, int postcode, String oldId){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String upQuery="UPDATE users SET name=\'"+name+"\', surname=\'"+surname+"\', email=\'"+email+"\', password=\'"+password+"\', id=\'"+id+"\', telephone=\'"+telephone+"\', address=\'"+address+"\', postcode=\'"+postcode+"\' WHERE id=\'"+oldId+"\'";
+			int result=stmt.executeUpdate(upQuery);
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
+			int result=0;
+			return result;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	public int uploadTable(String title, String description, String location, String userid){
 		Connection con=null;
 		try{
@@ -70,6 +87,34 @@ public class DatabaseMethods {
 				String usersId=result.getString(1);
 				String usersEmail=result.getString(2);
 				if ((id.equals(usersId)) || (email.equals(usersEmail))){
+					//User with same login details already exists
+					exists=1;
+				}
+			}
+			return exists;
+		}catch (SQLException e){
+			System.out.println("SQL statement did not executed");
+			int sqlError=1;
+			return sqlError;
+		}finally{
+			closedb(con);
+		}		
+	}
+	
+	//Method for identifying unique users only for the update
+	public int updateUniqueUser(String id, String email){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String uniqueQuery="SELECT id,email FROM users";
+			ResultSet result=stmt.executeQuery(uniqueQuery);
+			int exists=0;
+			
+			while (result.next()){
+				String usersId=result.getString(1);
+				String usersEmail=result.getString(2);
+				if ((id.equals(usersId)) && (email.equals(usersEmail))){
 					//User with same login details already exists
 					exists=1;
 				}
