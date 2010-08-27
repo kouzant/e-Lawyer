@@ -3,11 +3,19 @@
 <%@ include file="left.jsp" %>
 
     <div id="col_2">
-    <%if (session.isNew()){
+    <%
+    if (session.getAttribute("falseLogin") == "1") {
+    	%><div align="center">
+    	<font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font><br> 
+    	</div><%
+     	}
+    if (session.isNew()){
     	out.println("<h2>Welcome newcomer</h2>");
     }else{
     	out.println("<h2>Welcome back</h2>");
-    	}%>
+    	}
+    	
+	%>
       <p class="floatright alignright"><b>Page 1</b><br />
         [ 1, <a href="http://www.free-css.com/">2</a>, <a href="http://www.free-css.com/">3</a>, <a href="http://www.free-css.com/">4</a> ]</p>
       <h1>Example Headline One</h1>

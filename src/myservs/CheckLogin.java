@@ -38,11 +38,6 @@ public class CheckLogin extends HttpServlet {
 			userSession.setMaxInactiveInterval(10);
 			userSession.setAttribute("login", "0");
 			userSession.setAttribute("falseLogin", "1");
-			
-			RequestDispatcher rd=getServletContext().getRequestDispatcher("/login.jsp");
-			if(rd!=null){
-				rd.forward(request, response);
-			}
 		}else{
 			//Set the session attributes
 			
@@ -59,12 +54,11 @@ public class CheckLogin extends HttpServlet {
 			userSession.setAttribute("address", userCredentials[7]);
 			userSession.setAttribute("postcode", userCredentials[8]);
 			userSession.setAttribute("isadmin", userCredentials[9]);
-			
-			RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
-			if(rd!=null){
-				rd.forward(request, response);
-			}
 		}	
+		RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
+		if(rd!=null){
+			rd.forward(request, response);
+		}
 	}
 
 }

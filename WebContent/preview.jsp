@@ -70,7 +70,7 @@ try{
 		if(i==pageNumber){
 			out.println(i);
 		}else{
-			%>&nbsp;<a href="search.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
+			%>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
 		}
 	}
 	%>]</div><%
@@ -96,7 +96,7 @@ try{
 		if(i==pageNumber){
 	    	out.println(i);
 	    }else{
-	        %>&nbsp;<a href="search.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
+	        %>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
 	    }
 	}
 	%>]</div><%

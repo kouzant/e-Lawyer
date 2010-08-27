@@ -28,6 +28,7 @@
 				numOfUploads++;
 			}
 			out.println("<h2>On-line άρθρα: <b>"+numOfUploads+"</b></h2>");
+			out.println("<p>");
 		}catch (Exception e){
 			e.printStackTrace();
 		}finally{
@@ -42,5 +43,13 @@
 				<li><a href="logout.jsp" >Έξοδος</a></li>
         		<li><a href="cpanel.jsp" >Πίνακας Ελέγχου</a></li>
       		</ul>
-      <%} %>
+      <%}else{ %>
+      <br><br>
+      <b>Είσοδος:</b><br>
+      <form name="loginForm" method="post" action="CheckLogin">
+		<input type="text" size="15" name="email" value="E-mail" onclick="document.loginForm.email.value='';"><br>
+		<input type="password" size="15" name="password" value="Password" onclick="document.loginForm.password.value='';"><br><br>
+		<input type="submit" value="" style="background:url(assets/images/enter.png);width:70px;height:26px;border:0;">
+	  </form>
+	  <%} %>
     </div>

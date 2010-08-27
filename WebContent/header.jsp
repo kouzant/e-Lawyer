@@ -186,7 +186,6 @@ document.all.hideShow.style.visibility = 'visible';
     <li><a href="publish.jsp">Δημοσίευση Δεδικασμένου</a></li>
     <li><a href="lala">lala</a></li>
     <%}else{ %>
-    <li><a href="login.jsp">Είσοδος</a></li>
     <li><a href="register.jsp">Εγγραφή</a></li>
     <%} %>
     <li><a href="http://www.free-css.com/">Example Four</a></li>
