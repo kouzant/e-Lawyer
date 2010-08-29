@@ -73,6 +73,24 @@ public class DatabaseMethods {
 			closedb(con);
 		}
 	}
+	
+	public int populatePfileTable(String title, String comment, int revision, String path, String owner, String commonFileName){
+		Connection con=null;
+		int result=0;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String insQuery="INSERT INTO pfiles (title,comment,version,path,owner,fileName) VALUES ('"+title+"', '"+comment+"', '"+revision+"', '"+path+"', '"+owner+"', '"+commonFileName+"')";
+			result=stmt.executeUpdate(insQuery);
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return result;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	//Method for identifying unique users
 	public int uniqueUser(String id, String email){
 		Connection con=null;
@@ -154,6 +172,26 @@ public class DatabaseMethods {
 		}catch(Exception e){
 			e.printStackTrace();
 			return userCredentials;
+		}finally{
+			closedb(con);
+		}
+	}
+	
+	public int findFileRevision(String commonFileName){
+		Connection con=null;
+		int revision=0;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String queryString="SELECT version FROM pfiles WHERE fileName=\'"+commonFileName+"\'";
+			ResultSet result=stmt.executeQuery(queryString);
+			while(result.next()){
+				revision=result.getInt(1);
+			}
+			return revision;
+		}catch(Exception e){
+			e.printStackTrace();
+			return revision;
 		}finally{
 			closedb(con);
 		}

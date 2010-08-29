@@ -5,13 +5,9 @@
 <%@ include file="left.jsp" %>
 
 
-<div id="col_2">
-<h2>Wrong Page</h2>
-
-<%
-
-%>
-
+<div id="col_2" align="center">
+<br><br>
+<font color="red"><u>Η σελίδα που προπαθήσατε να προσπελάσετε δεν βρέθηκαι στον εξυπηρετητή.</u></font><br>
 
 </div>
 <%@ include file="footer.jsp" %>

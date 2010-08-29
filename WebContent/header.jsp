@@ -184,10 +184,10 @@ document.all.hideShow.style.visibility = 'visible';
     <%request.setCharacterEncoding("UTF-8"); 
     if (session.getAttribute("login")=="1"){%>
     <li><a href="publish.jsp">Δημοσίευση Δεδικασμένου</a></li>
+    <li><a href="projects.jsp">Τα projects μου</a></li>
     <li><a href="lala">lala</a></li>
     <%}else{ %>
     <li><a href="register.jsp">Εγγραφή</a></li>
     <%} %>
-    <li><a href="http://www.free-css.com/">Example Four</a></li>
   </ul>
   

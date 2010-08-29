@@ -2,8 +2,8 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
 
-<%if (session.getAttribute("login")=="1"){ %>
 <div id="col_2">
+<%if (session.getAttribute("login")=="1"){ %>
 <h2>Δημοσίευση Δεδικασμένης Υπόθεσης</h2>
 <img border="0" src="assets/images/spacer.gif"><br><br>
 <%if (session.getAttribute("fileUpload")=="1"){%>
