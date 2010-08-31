@@ -78,7 +78,7 @@ public class AddProject extends HttpServlet {
 					if(fieldsEmpty==true){
 						userSession.setAttribute("fieldsEmpty", "1");
 					}else{
-						String userPath=getServletContext().getRealPath(DESTINATION_DIR_PATH).concat("/").concat(userSession.getAttribute("id").toString());
+						String userPath=getServletContext().getRealPath(DESTINATION_DIR_PATH).concat("/").concat(userSession.getAttribute("initId").toString());
 						File userDir=new File(userPath);
 						if(!userDir.exists()){
 							Boolean succeed=new File(userPath).mkdirs();
@@ -99,7 +99,7 @@ public class AddProject extends HttpServlet {
 						String title=new String(isoTitle.getBytes("ISO8859_1"),"UTF-8");
 						String isoComment=paramMap.get("comment");
 						String comment=new String(isoComment.getBytes("ISO8859_1"),"UTF-8");
-						int insResult=dbPoint.populatePfileTable(title, comment, revision, realPath, userSession.getAttribute("id").toString(), commonFileName);
+						int insResult=dbPoint.populatePfileTable(title, comment, revision, realPath, userSession.getAttribute("initId").toString(), commonFileName, item.getName());
 						if (insResult==0){
 							userSession.setAttribute("uploadPfiledbError", "1");
 						}		

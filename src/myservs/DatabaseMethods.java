@@ -28,7 +28,7 @@ public class DatabaseMethods {
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
-			String insQuery="INSERT INTO users (name,surname,email,password,id,telephone,address,postcode,isadmin) VALUES ('"+name+"','"+surname+"','"+email+"','"+password+"','"+id+"','"+telephone+"','"+address+"','"+postcode+"','"+isadmin+"')";
+			String insQuery="INSERT INTO users (name,surname,email,password,id,initId,telephone,address,postcode,isadmin) VALUES ('"+name+"','"+surname+"','"+email+"','"+password+"','"+id+"','"+id+"','"+telephone+"','"+address+"','"+postcode+"','"+isadmin+"')";
 			int result=stmt.executeUpdate(insQuery);
 			return result;
 		}catch(SQLException e){
@@ -74,13 +74,13 @@ public class DatabaseMethods {
 		}
 	}
 	
-	public int populatePfileTable(String title, String comment, int revision, String path, String owner, String commonFileName){
+	public int populatePfileTable(String title, String comment, int revision, String path, String owner, String commonFileName, String realName){
 		Connection con=null;
 		int result=0;
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
-			String insQuery="INSERT INTO pfiles (title,comment,version,path,owner,fileName) VALUES ('"+title+"', '"+comment+"', '"+revision+"', '"+path+"', '"+owner+"', '"+commonFileName+"')";
+			String insQuery="INSERT INTO pfiles (title,comment,version,path,owner,fileName,realName) VALUES ('"+title+"', '"+comment+"', '"+revision+"', '"+path+"', '"+owner+"', '"+commonFileName+"', '"+realName+"')";
 			result=stmt.executeUpdate(insQuery);
 			return result;
 		}catch(SQLException e){
@@ -150,7 +150,7 @@ public class DatabaseMethods {
 	//Login method
 	public String[] identifyUser(String email, String password){
 		Connection con=null;
-		String userCredentials[]=new String[10];
+		String userCredentials[]=new String[11];
 		
 		try{
 			con=connect();

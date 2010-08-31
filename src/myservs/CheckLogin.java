@@ -50,10 +50,11 @@ public class CheckLogin extends HttpServlet {
 			userSession.setAttribute("email", userCredentials[3]);
 			userSession.setAttribute("password", userCredentials[4]);
 			userSession.setAttribute("id", userCredentials[5]);
-			userSession.setAttribute("telephone", userCredentials[6]);
-			userSession.setAttribute("address", userCredentials[7]);
-			userSession.setAttribute("postcode", userCredentials[8]);
-			userSession.setAttribute("isadmin", userCredentials[9]);
+			userSession.setAttribute("initId", userCredentials[6]);
+			userSession.setAttribute("telephone", userCredentials[7]);
+			userSession.setAttribute("address", userCredentials[8]);
+			userSession.setAttribute("postcode", userCredentials[9]);
+			userSession.setAttribute("isadmin", userCredentials[10]);
 		}	
 		RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
 		if(rd!=null){
