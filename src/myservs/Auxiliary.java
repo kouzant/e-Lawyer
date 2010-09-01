@@ -2,6 +2,9 @@ package myservs;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.io.*;
+import java.nio.*;
+import java.nio.channels.*;
 
 public class Auxiliary {
 	public String shaDigest(String id){
@@ -47,6 +50,29 @@ public class Auxiliary {
     	}catch(NumberFormatException e){
     		String strResult=null;
     		return strResult;
+    	}
+    }
+    
+
+    public void copyFile(File sourceFile, File destFile) throws IOException {
+    	 if(!destFile.exists()) {
+    	  destFile.createNewFile();
+    	 }
+
+    	 FileChannel source = null;
+    	 FileChannel destination = null;
+    	 try {
+    	  source = new FileInputStream(sourceFile).getChannel();
+    	  destination = new FileOutputStream(destFile).getChannel();
+    	  destination.transferFrom(source, 0, source.size());
+    	 }
+    	 finally {
+    	  if(source != null) {
+    	   source.close();
+    	  }
+    	  if(destination != null) {
+    	   destination.close();
+    	  }
     	}
     }
     

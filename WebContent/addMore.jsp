@@ -19,6 +19,7 @@ if (session.getAttribute("uploadPfiledbError")=="1"){%>
 <table border="0" align="left">
 <tr>
 <th><h4></h4> </th><th><input type="hidden" name="title" value="<% out.println(request.getAttribute("title")); %>"></th></tr>
+<tr><th><h4></h4> </th><th><input type="hidden" name="addMore" value="1"></th></tr>
 <tr><th><h4>* Σχόλιο:</h4></th> <th><textarea name="comment" cols="30" rows="5"></textarea></th></tr>
 <tr><th><h4>* Αρχείο:</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>

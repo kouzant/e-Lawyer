@@ -197,6 +197,34 @@ public class DatabaseMethods {
 		}
 	}
 	
+	public String[] getFileAttributes(String path){
+		Connection con=null;
+		String fileAttributes[]=new String[8];
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			System.out.println(path);
+			String query="SELECT * FROM pfiles WHERE path=\'"+path+"\'";
+			ResultSet result=stmt.executeQuery(query);
+			while(result.next()){
+				fileAttributes[0]=Integer.toString(result.getInt(1));
+				fileAttributes[1]=result.getString(2);
+				fileAttributes[2]=result.getString(3);
+				fileAttributes[3]=Integer.toString(result.getInt(4));
+				fileAttributes[4]=result.getString(5);
+				fileAttributes[5]=result.getString(6);
+				fileAttributes[6]=result.getString(7);
+				fileAttributes[7]=result.getString(8);
+			}
+			return fileAttributes;
+		}catch(Exception e){
+			e.printStackTrace();
+			return fileAttributes;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	//Method for closing the connection to db server
 	public void closedb(Connection con){
 		if (con != null){

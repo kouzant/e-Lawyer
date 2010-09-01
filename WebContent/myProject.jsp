@@ -33,11 +33,33 @@ try{
 	Statement stmt=con.createStatement();
 	ResultSet result;
 	result=stmt.executeQuery("SELECT  * FROM pfiles WHERE fileName='"+request.getParameter("project")+"' LIMIT "+offset+","+entriesPerPage);
-	result.next();
+	result.last();
+	session.setAttribute("path",result.getString(5));
+	result.first();
 %>
 <div id="col_2">
 <h2><% out.println(result.getString(2)); result.beforeFirst(); %></h2>
 <img border="0" src="assets/images/spacer.gif"><br>
+<div align="center">
+<%if (session.getAttribute("downloadVersionEmpty")=="1"){%>
+<font color=red>Δεν εισάγατε αριθμό έκδοσης.</font>
+<%
+session.setAttribute("downloadVersionEmpty","0");
+}
+if (session.getAttribute("versionBiggerReal")=="1"){%>
+<font color=red>Η έκδοση που εισάγατε είναι μεγαλύτερη από την καταγεγραμμένη.</font>
+<%
+session.setAttribute("versionBiggerReal","0");
+}
+out.println(session.getAttribute("downloadLink"));
+if (session.getAttribute("downloadLink")!=null){%>
+<a href="<% out.println(session.getAttribute("downloadLink")); %>">Download</a>
+<%
+}%>
+</div>
+<div align="right"><form method="post" action="Download">
+Έκδοση: <input type="text" name="fileVersion" size="1"><br>
+<input type="submit" value="Download"></form></div><br>
 <%
 %><div align="right">[<%
 	for(i=1;i<=totalPages;i++){
