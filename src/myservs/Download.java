@@ -41,8 +41,7 @@ public class Download extends HttpServlet {
 
 			int givenVersion=Integer.parseInt(request.getParameter("fileVersion").toString());
 			int realVersion=Integer.parseInt(fileAttributes[2]);
-			System.out.println("givenVersion: "+givenVersion);
-			System.out.println("realVersion: "+realVersion);
+		
 			if(givenVersion>realVersion){
 				userSession.setAttribute("versionBiggerReal", "1");
 			}else{
@@ -52,8 +51,7 @@ public class Download extends HttpServlet {
 				File trgDir = new File(getServletContext().getRealPath(DNL_DIR_PATH), fileNoVersion);
 				File srcFile=new File(sourceDir);
 				System.out.println("sourceDir: "+sourceDir);
-				//System.out.println("trgDir: "+trgFile.toString());
-				//auxPoint.copyFile(srcFile, trgFile);
+			
 				try{
 					FileUtils.copyFile(srcFile, trgDir);
 					String downloadLink="/e-Lawyer/uploads/downloads/".concat(fileNoVersion);

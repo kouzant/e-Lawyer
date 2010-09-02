@@ -53,7 +53,7 @@ if (session.getAttribute("versionBiggerReal")=="1"){%>
 session.setAttribute("versionBiggerReal","0");
 }
 if (session.getAttribute("downloadLink")!=null){%>
-<a href="<% out.println(session.getAttribute("downloadLink")); %>">Download</a>
+<a href="<% out.println(session.getAttribute("downloadLink")); %>">[Download]</a>
 <%
 session.removeAttribute("downloadLink");
 }%>
@@ -74,7 +74,7 @@ session.removeAttribute("downloadLink");
 
 while(result.next()){%>
 	<table border="0" align="center">
-	<tr><td><b>Έκδοση: </b><% out.println(result.getInt(3)); %></td><td><a href="<%out.print(result.getString(4));%>">[Download]</a></td></tr>
+	<tr><td><b>Έκδοση: </b><% out.println(result.getInt(3)); %></td></tr>
 	</table>
 	<blockquote><u><b>Σχόλιο: </b></u><br><% out.println(result.getString(2)); %></blockquote>
 	<hr>

@@ -55,6 +55,7 @@ public class CheckLogin extends HttpServlet {
 			userSession.setAttribute("address", userCredentials[8]);
 			userSession.setAttribute("postcode", userCredentials[9]);
 			userSession.setAttribute("isadmin", userCredentials[10]);
+			userSession.setAttribute("enabled", userCredentials[11]);
 		}	
 		RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
 		if(rd!=null){

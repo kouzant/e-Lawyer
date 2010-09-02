@@ -9,6 +9,12 @@
     	<font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font><br> 
     	</div><%
      	}
+    if((session.getAttribute("login")=="1") && (session.getAttribute("enabled").toString().equals("0"))){
+    	session.setAttribute("login","0");%>
+    	<div align="center">
+    	<font color="red">Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμα.</font>
+    	</div>
+    <%}
     if (session.isNew()){
     	out.println("<h2>Welcome newcomer</h2>");
     }else{

@@ -152,7 +152,7 @@ public class DatabaseMethods {
 	//Login method
 	public String[] identifyUser(String email, String password){
 		Connection con=null;
-		String userCredentials[]=new String[11];
+		String userCredentials[]=new String[12];
 		
 		try{
 			con=connect();
@@ -164,7 +164,7 @@ public class DatabaseMethods {
 				String storedEmail=result.getString(4);
 				String storedPass=result.getString(5);
 				if (email.equals(storedEmail) && password.equals(storedPass)){
-					for (int i=1;i<11;i++){
+					for (int i=1;i<13;i++){
 						userCredentials[i-1]=result.getString(i);
 					}
 					break;

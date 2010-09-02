@@ -111,7 +111,6 @@ public class AddProject extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			System.out.println(paramMap.get("addMoreForm"));
 			if(paramMap.get("addMoreForm").equals("true")){
 				userSession.setAttribute("addMoreForm","0");
 				RequestDispatcher rd=getServletContext().getRequestDispatcher("/addMore.jsp");

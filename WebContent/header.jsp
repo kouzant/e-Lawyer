@@ -21,6 +21,32 @@
     top:10px;
     left:370px;
     }
+    
+table.projects {
+	border-width: 0px 0px 0px 0px;
+	border-spacing: 0px;
+	border-style: none none none none;
+	border-color: gray gray gray gray;
+	border-collapse: separate;
+	background-color: rgb(255, 255, 240);
+}
+table.projects th {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: inset inset inset inset;
+	border-color: red red red red;
+	background-color: white;
+	-moz-border-radius: 3px 3px 3px 3px;
+}
+table.projects td {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: inset inset inset inset;
+	border-color: red red red red;
+	background-color: white;
+	-moz-border-radius: 3px 3px 3px 3px;
+}
+
 </style>
 
 <SCRIPT LANGUAGE="JavaScript">
@@ -185,7 +211,9 @@ document.all.hideShow.style.visibility = 'visible';
     if (session.getAttribute("login")=="1"){%>
     <li><a href="publish.jsp">Δημοσίευση Δεδικασμένου</a></li>
     <li><a href="projects.jsp">Τα projects μου</a></li>
-    <li><a href="lala">lala</a></li>
+    <%if(session.getAttribute("isadmin").toString().equals("1")){%>
+    <li><a href="admin.jsp">Διαχείριση</a></li>
+    <%} %>
     <%}else{ %>
     <li><a href="register.jsp">Εγγραφή</a></li>
     <%} %>
