@@ -197,20 +197,21 @@ public class DatabaseMethods {
 		}
 	}
 	
-	public String[] getFileAttributes(String path){
+	public String[] getFileAttributes(String path, int revision){
 		Connection con=null;
 		String fileAttributes[]=new String[8];
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
 			System.out.println(path);
-			String query="SELECT * FROM pfiles WHERE path=\'"+path+"\'";
+			String query="SELECT * FROM pfiles WHERE fileName=\'"+path+"\' AND version=\'"+revision+"\'";
 			ResultSet result=stmt.executeQuery(query);
 			while(result.next()){
 				fileAttributes[0]=Integer.toString(result.getInt(1));
 				fileAttributes[1]=result.getString(2);
 				fileAttributes[2]=result.getString(3);
 				fileAttributes[3]=Integer.toString(result.getInt(4));
+				System.out.println(fileAttributes[3]);
 				fileAttributes[4]=result.getString(5);
 				fileAttributes[5]=result.getString(6);
 				fileAttributes[6]=result.getString(7);

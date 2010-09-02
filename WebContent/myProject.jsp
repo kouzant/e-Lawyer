@@ -34,7 +34,7 @@ try{
 	ResultSet result;
 	result=stmt.executeQuery("SELECT  * FROM pfiles WHERE fileName='"+request.getParameter("project")+"' LIMIT "+offset+","+entriesPerPage);
 	result.last();
-	session.setAttribute("path",result.getString(5));
+	session.setAttribute("fileName",result.getString(7));
 	result.first();
 %>
 <div id="col_2">
@@ -51,10 +51,10 @@ if (session.getAttribute("versionBiggerReal")=="1"){%>
 <%
 session.setAttribute("versionBiggerReal","0");
 }
-out.println(session.getAttribute("downloadLink"));
 if (session.getAttribute("downloadLink")!=null){%>
 <a href="<% out.println(session.getAttribute("downloadLink")); %>">Download</a>
 <%
+session.removeAttribute("downloadLink");
 }%>
 </div>
 <div align="right"><form method="post" action="Download">

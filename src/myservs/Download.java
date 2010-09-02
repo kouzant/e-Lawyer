@@ -31,10 +31,9 @@ public class Download extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		DatabaseMethods dbPoint = new DatabaseMethods();
-		Auxiliary auxPoint = new Auxiliary();
 		HttpSession userSession=request.getSession();
 		String fileAttributes[]=new String[8];
-		fileAttributes=dbPoint.getFileAttributes(userSession.getAttribute("path").toString());
+		fileAttributes=dbPoint.getFileAttributes(userSession.getAttribute("fileName").toString(), Integer.parseInt(request.getParameter("fileVersion")));
 
 		if(request.getParameter("fileVersion").isEmpty()){
 			userSession.setAttribute("downloadVersionEmpty", "1");
