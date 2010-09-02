@@ -1,6 +1,8 @@
 package myservs;
 
 import java.sql.*;
+import java.util.*;
+import java.io.*;
 
 public class DatabaseMethods {
 
@@ -203,7 +205,6 @@ public class DatabaseMethods {
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
-			System.out.println(path);
 			String query="SELECT * FROM pfiles WHERE fileName=\'"+path+"\' AND version=\'"+revision+"\'";
 			ResultSet result=stmt.executeQuery(query);
 			while(result.next()){
@@ -222,6 +223,27 @@ public class DatabaseMethods {
 		}finally{
 			closedb(con);
 		}
+	}
+	
+	public String[] getProjectAttributes(String fileName){
+		String[] projectAtt=new String[2];
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String qString="SELECT comment,version FROM pfiles WHERE fileName=\'"+fileName+"\' ORDER BY version ASC";
+			ResultSet result=stmt.executeQuery(qString);
+			result.last();
+			projectAtt[0]=result.getString(1);
+			projectAtt[1]=Integer.toString(result.getInt(2));
+			return projectAtt;
+		}catch(Exception e){
+			e.printStackTrace();
+			return projectAtt;
+		}finally{
+			closedb(con);
+		}
+		
 	}
 	
 	//Method for closing the connection to db server
