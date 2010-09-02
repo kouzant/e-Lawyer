@@ -2,6 +2,7 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
 <div id="col_2">
+<%if (session.getAttribute("login")=="1"){ %>
 <h2>Ενημέρωση project</h2>
 <img border="0" src="assets/images/spacer.gif"><br><br>
 <%if (session.getAttribute("fileUpload")=="1"){%>
@@ -18,13 +19,18 @@ if (session.getAttribute("uploadPfiledbError")=="1"){%>
 <form method="post" action="AddProject" enctype="multipart/form-data">
 <table border="0" align="left">
 <tr>
-<th><h4></h4> </th><th><input type="hidden" name="title" value="<% out.println(request.getAttribute("title")); %>"></th></tr>
-<tr><th><h4></h4> </th><th><input type="hidden" name="addMore" value="1"></th></tr>
+<th><h4></h4> </th><th><input type="hidden" name="title" value="<% out.println(request.getParameter("title")); %>"></th></tr>
+<tr><th></th><th><input type="hidden" name="addMoreForm" value="true"></th></tr>
 <tr><th><h4>* Σχόλιο:</h4></th> <th><textarea name="comment" cols="30" rows="5"></textarea></th></tr>
 <tr><th><h4>* Αρχείο:</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
+<% session.setAttribute("addMoreForm", "1"); %>
 <tr><th><input type="submit" value="" style="background:url(assets/images/upload.png);width:70px;height:25px;border:0;"></th></tr>
 </table>
 </form>
+<%}else{ 
+%>
+<h3>Η είσοδος επιτρέπεται μόνο σε εγγεγραμμένα μέλη.</h3>
+<%} %>
 </div>
 <%@ include file="footer.jsp" %>

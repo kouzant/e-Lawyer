@@ -2,6 +2,7 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
 <div id="col_2">
+<%if (session.getAttribute("login")=="1"){ %>
 <h2>Προσθήκη project</h2>
 <img border="0" src="assets/images/spacer.gif"><br><br>
 <%if (session.getAttribute("fileUpload")=="1"){%>
@@ -19,11 +20,16 @@ if (session.getAttribute("uploadPfiledbError")=="1"){%>
 <table border="0" align="left">
 <tr>
 <th><h4>* Τίτλος:</h4> </th><th><input type="text" name="title"></th></tr>
+<tr><th></th><th><input type="hidden" name="addMoreForm" value="false"></th></tr>
 <tr><th><h4>* Σχόλιο:</h4></th> <th><textarea name="comment" cols="30" rows="5"></textarea></th></tr>
 <tr><th><h4>* Αρχείο:</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
 <tr><th><input type="submit" value="" style="background:url(assets/images/upload.png);width:70px;height:25px;border:0;"></th></tr>
 </table>
 </form>
+<%}else{ 
+%>
+<h3>Η είσοδος επιτρέπεται μόνο σε εγγεγραμμένα μέλη.</h3>
+<%} %>
 </div>
 <%@ include file="footer.jsp" %>

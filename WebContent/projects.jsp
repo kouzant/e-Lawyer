@@ -2,11 +2,12 @@
 <%@ include file="header.jsp" %>
 <%@ include file="left.jsp" %>
 <div id="col_2">
+<%if (session.getAttribute("login")=="1"){ %>
 <h2>Τα projects μου</h2>
 <img border="0" src="assets/images/spacer.gif"><br><br>
 
 <div align="center">
-<a href="addProject.jsp">Προσθήκη</a>
+<a href="addProject.jsp">Προσθήκη νέου project</a>
 </div>
 <br>
 <hr>
@@ -30,5 +31,9 @@ try{
 	dbpoint.closedb(con);
 }
 %>
+<%}else{ 
+%>
+<h3>Η είσοδος επιτρέπεται μόνο σε εγγεγραμμένα μέλη.</h3>
+<%} %>
 </div>
 <%@ include file="footer.jsp" %>

@@ -91,7 +91,8 @@ try{
 	
 	<%
 	}
-	%><p><p><div align="right">[<%
+	%><p><p>
+	<div align="right">[<%
 	for(i=1;i<=totalPages;i++){
 		if(i==pageNumber){
 	    	out.println(i);

@@ -32,13 +32,14 @@ try{
 	con=dbpoint.connect();
 	Statement stmt=con.createStatement();
 	ResultSet result;
-	result=stmt.executeQuery("SELECT  * FROM pfiles WHERE fileName='"+request.getParameter("project")+"' LIMIT "+offset+","+entriesPerPage);
+	result=stmt.executeQuery("SELECT  * FROM pfiles WHERE fileName='"+request.getParameter("project")+"' ORDER BY version DESC LIMIT "+offset+","+entriesPerPage);
 	result.last();
-	session.setAttribute("fileName",result.getString(7));
+	session.setAttribute("fileName",result.getString(6));
 	result.first();
 %>
 <div id="col_2">
-<h2><% out.println(result.getString(2)); result.beforeFirst(); %></h2>
+<%if (session.getAttribute("login")=="1"){ %>
+<h2><% out.println(result.getString(1)); result.beforeFirst(); %></h2>
 <img border="0" src="assets/images/spacer.gif"><br>
 <div align="center">
 <%if (session.getAttribute("downloadVersionEmpty")=="1"){%>
@@ -73,9 +74,9 @@ session.removeAttribute("downloadLink");
 
 while(result.next()){%>
 	<table border="0" align="center">
-	<tr><td><b>Έκδοση: </b><% out.println(result.getInt(4)); %></td><td><a href="<%out.print(result.getString(5));%>">[Download]</a></td></tr>
+	<tr><td><b>Έκδοση: </b><% out.println(result.getInt(3)); %></td><td><a href="<%out.print(result.getString(4));%>">[Download]</a></td></tr>
 	</table>
-	<blockquote><u><b>Σχόλιο: </b></u><br><% out.println(result.getString(3)); %></blockquote>
+	<blockquote><u><b>Σχόλιο: </b></u><br><% out.println(result.getString(2)); %></blockquote>
 	<hr>
 	
 <%}
@@ -88,12 +89,15 @@ while(result.next()){%>
 		}
 	}
 %>]</div><%
+}else{ 
+	%>
+	<h3>Η είσοδος επιτρέπεται μόνο σε εγγεγραμμένα μέλη.</h3>
+	<%}
 }catch(SQLException e){
 	e.printStackTrace();
 }finally{
 	dbpoint.closedb(con);
-}
-%>
+}%>
 
 </div>
 <%@ include file="footer.jsp" %>

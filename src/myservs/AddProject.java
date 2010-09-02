@@ -47,13 +47,13 @@ public class AddProject extends HttpServlet {
 		DiskFileItemFactory fileItemFactory=new DiskFileItemFactory();
 		fileItemFactory.setSizeThreshold(1024*1024);
 		fileItemFactory.setRepository(tmpDir);
-		
+		HttpSession userSession=request.getSession();
+		Map<String,String> paramMap = new HashMap<String,String>();
+
 		ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
 		try{
-			HttpSession userSession=request.getSession();
 			boolean fieldsEmpty=false;
 			
-			Map<String,String> paramMap = new HashMap<String,String>();
 			
 			@SuppressWarnings("rawtypes")
 			List items=uploadHandler.parseRequest(request);
@@ -111,10 +111,19 @@ public class AddProject extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			RequestDispatcher rd=getServletContext().getRequestDispatcher("/addProject.jsp");
-			if(rd!=null){
-				rd.forward(request, response);
-			}
+			System.out.println(paramMap.get("addMoreForm"));
+			if(paramMap.get("addMoreForm").equals("true")){
+				userSession.setAttribute("addMoreForm","0");
+				RequestDispatcher rd=getServletContext().getRequestDispatcher("/addMore.jsp");
+				if(rd!=null){
+					rd.forward(request, response);
+				}
+			}else{
+				RequestDispatcher rd=getServletContext().getRequestDispatcher("/addProject.jsp");
+				if(rd!=null){
+					rd.forward(request, response);
+				}
+			}	
 		}
 	}
 

@@ -183,7 +183,7 @@ public class DatabaseMethods {
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
-			String queryString="SELECT version FROM pfiles WHERE fileName=\'"+commonFileName+"\'";
+			String queryString="SELECT version FROM pfiles WHERE fileName=\'"+commonFileName+"\' ORDER BY version ASC";
 			ResultSet result=stmt.executeQuery(queryString);
 			while(result.next()){
 				revision=result.getInt(1);
@@ -199,7 +199,7 @@ public class DatabaseMethods {
 	
 	public String[] getFileAttributes(String path, int revision){
 		Connection con=null;
-		String fileAttributes[]=new String[8];
+		String fileAttributes[]=new String[7];
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
@@ -207,15 +207,13 @@ public class DatabaseMethods {
 			String query="SELECT * FROM pfiles WHERE fileName=\'"+path+"\' AND version=\'"+revision+"\'";
 			ResultSet result=stmt.executeQuery(query);
 			while(result.next()){
-				fileAttributes[0]=Integer.toString(result.getInt(1));
+				fileAttributes[0]=result.getString(1);
 				fileAttributes[1]=result.getString(2);
-				fileAttributes[2]=result.getString(3);
-				fileAttributes[3]=Integer.toString(result.getInt(4));
-				System.out.println(fileAttributes[3]);
+				fileAttributes[2]=Integer.toString(result.getInt(3));
+				fileAttributes[3]=result.getString(4);
 				fileAttributes[4]=result.getString(5);
 				fileAttributes[5]=result.getString(6);
 				fileAttributes[6]=result.getString(7);
-				fileAttributes[7]=result.getString(8);
 			}
 			return fileAttributes;
 		}catch(Exception e){

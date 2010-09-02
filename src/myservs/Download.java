@@ -32,7 +32,7 @@ public class Download extends HttpServlet {
 		
 		DatabaseMethods dbPoint = new DatabaseMethods();
 		HttpSession userSession=request.getSession();
-		String fileAttributes[]=new String[8];
+		String fileAttributes[]=new String[7];
 		fileAttributes=dbPoint.getFileAttributes(userSession.getAttribute("fileName").toString(), Integer.parseInt(request.getParameter("fileVersion")));
 
 		if(request.getParameter("fileVersion").isEmpty()){
@@ -40,15 +40,15 @@ public class Download extends HttpServlet {
 		}else{
 
 			int givenVersion=Integer.parseInt(request.getParameter("fileVersion").toString());
-			int realVersion=Integer.parseInt(fileAttributes[3]);
+			int realVersion=Integer.parseInt(fileAttributes[2]);
 			System.out.println("givenVersion: "+givenVersion);
 			System.out.println("realVersion: "+realVersion);
 			if(givenVersion>realVersion){
 				userSession.setAttribute("versionBiggerReal", "1");
 			}else{
 				//DO the stuff
-				String fileNoVersion=fileAttributes[7];
-				String sourceDir=fileAttributes[4];
+				String fileNoVersion=fileAttributes[6];
+				String sourceDir=fileAttributes[3];
 				File trgDir = new File(getServletContext().getRealPath(DNL_DIR_PATH), fileNoVersion);
 				File srcFile=new File(sourceDir);
 				System.out.println("sourceDir: "+sourceDir);
@@ -64,7 +64,7 @@ public class Download extends HttpServlet {
 				
 			}
 		}
-		RequestDispatcher rd=getServletContext().getRequestDispatcher("/myProject.jsp?project="+fileAttributes[6]);
+		RequestDispatcher rd=getServletContext().getRequestDispatcher("/myProject.jsp?project="+fileAttributes[5]);
 		if(rd!=null){
 			rd.forward(request, response);
 		}
