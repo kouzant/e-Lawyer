@@ -1,8 +1,6 @@
 package myservs;
 
 import java.sql.*;
-import java.util.*;
-import java.io.*;
 
 public class DatabaseMethods {
 
@@ -47,12 +45,30 @@ public class DatabaseMethods {
 		try{
 			con=connect();
 			Statement stmt=con.createStatement();
-			String upQuery="UPDATE users SET name=\'"+name+"\', surname=\'"+surname+"\', email=\'"+email+"\', password=\'"+password+"\', id=\'"+id+"\', telephone=\'"+telephone+"\', address=\'"+address+"\', postcode=\'"+postcode+"\' WHERE id=\'"+oldId+"\'";
+			String upQuery="UPDATE users SET name=\'"+name+"\', surname=\'"+surname+"\', email=\'"+email+"\', password=\'"+password+"\', id=\'"+id+"\', telephone=\'"+telephone+"\', address=\'"+address+"\', postcode=\'"+postcode+"\' WHERE id =\'"+oldId+"\'";
 			int result=stmt.executeUpdate(upQuery);
 			return result;
 		}catch(SQLException e){
 			e.printStackTrace();
 			int result=0;
+			return result;
+		}finally{
+			closedb(con);
+		}
+	}
+	
+	public int updateAdmUser(String name, String surname, String email, String id, int telephone, String address, int postcode, int state, String oldId){
+		Connection con=null;
+		int result=0;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String upQuery="UPDATE users SET name=\'"+name+"\', surname=\'"+surname+"\', email=\'"+email+"\', id=\'"+id+"\', initId=\'"+oldId+"\', telephone=\'"+telephone+"\', address=\'"+address+"\', postcode=\'"+postcode+"\', enabled=\'"+state+"\' WHERE initId=\'"+oldId+"'";
+			result=stmt.executeUpdate(upQuery);
+			
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
 			return result;
 		}finally{
 			closedb(con);
@@ -107,6 +123,33 @@ public class DatabaseMethods {
 				String usersId=result.getString(1);
 				String usersEmail=result.getString(2);
 				if ((id.equals(usersId)) || (email.equals(usersEmail))){
+					//User with same login details already exists
+					exists=1;
+				}
+			}
+			return exists;
+		}catch (SQLException e){
+			System.out.println("SQL statement did not executed");
+			int sqlError=1;
+			return sqlError;
+		}finally{
+			closedb(con);
+		}		
+	}
+	
+	//Method for identifying unique users
+	public int uniqueEmailUser(String email){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String uniqueQuery="SELECT email FROM users";
+			ResultSet result=stmt.executeQuery(uniqueQuery);
+			int exists=0;
+			
+			while (result.next()){
+				String usersEmail=result.getString(2);
+				if (email.equals(usersEmail)){
 					//User with same login details already exists
 					exists=1;
 				}
@@ -179,6 +222,22 @@ public class DatabaseMethods {
 		}
 	}
 	
+	public void deleteUser(String userId, String initId){
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String userString="DELETE FROM users WHERE id=\'"+userId+"\'";
+			int result=stmt.executeUpdate(userString);
+			String fileString="DELETE FROM pfiles WHERE owner=\'"+userId+"\'";
+			result=stmt.executeUpdate(fileString);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	public int findFileRevision(String commonFileName){
 		Connection con=null;
 		int revision=0;
@@ -244,6 +303,25 @@ public class DatabaseMethods {
 			closedb(con);
 		}
 		
+	}
+	
+	public String getOldId(String id){
+		String initId=null;
+		Connection con=null;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String qString="SELECT initId FROM users WHERE id=\'"+id+"\'";
+			ResultSet result=stmt.executeQuery(qString);
+			result.next();
+			initId=result.getString(1);
+			return initId;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return initId;
+		}finally{
+			closedb(con);
+		}
 	}
 	
 	//Method for closing the connection to db server

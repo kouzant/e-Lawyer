@@ -7,6 +7,28 @@
 <%if ((session.getAttribute("login")=="1") && (session.getAttribute("isadmin").toString().equals("1"))){ %>
 <h2>Διαχείριση Χρηστών</h2>
 <img border="0" src="assets/images/spacer.gif"><br>
+<%
+if (session.getAttribute("error")=="1"){
+%>
+<font color="red"><u>Συμπληρώστε όλα τα απαραίτητα πεδία.</u></font><br>
+<%session.setAttribute("error","-1");
+} 
+if(session.getAttribute("adminUpdate")=="0"){
+%>
+<font color="red"><u>Η αλλαγή απέτυχε. Επικοινωνήστε με το διαχειριστή.</u></font><br><%
+session.setAttribute("adminUpdate","-1");
+}else if(session.getAttribute("adminUpdate")=="1"){%>
+<font color="green"><u>Η αλλαγή ολοκληρώθηκαι επιτυχώς.</u></font><br>
+<%
+session.setAttribute("adminUpdate","-1");
+}
+if(session.getAttribute("userDelete")=="1"){%>
+<font color="green"><u>Ο χρήστης διεγράφη επιτυχώς.</u></font><br>
+<%
+session.setAttribute("userDelete","0");
+}
+%>
+
 <a href="javascript:showdiv()">Αναζήτηση</a>
 
 <form method="post">
@@ -28,8 +50,6 @@ int enabledUsers=0;
 int totalEntries;
 String qString;
 try{
-	
-	
 	//Actual page preview
 	con3=dbpoint.connect();
 	Statement stmt3=con3.createStatement();
@@ -92,13 +112,13 @@ try{
 	            %>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
 	        }
 	     }
-	%>]</div>
-	<u>Ανενεργοί Χρήστες</u>
+	%>]</div>	
 	<div align="center">
+	<u>Ανενεργοί Χρήστες</u>
 	<table class="projects">
+	<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Make Admin</th></tr>
 	<%
 	int disCounter=1;
-	System.out.println(disabledUsers);
 	boolean disControl=true;
 	boolean enControl=true;
 	while(result4.next()){
@@ -111,12 +131,14 @@ try{
 			<%
 		}
 		%>
-		<tr><td><% out.println(result4.getString(2)); %></td><td><% out.println(result4.getString(3)); %></td><td><% out.println(result4.getString(4)); %></td></tr>
+		<tr align="center"><td><% out.println(result4.getString(2)); %></td><td><% out.println(result4.getString(3)); %></td><td><% out.println(result4.getString(4)); %></td><td><a href="admEdit.jsp?id=<% out.println(result4.getString(6));%>"><img border="0" src="assets/images/tools_16.png"></a> </td><td><a href="UserDel?userId=<% out.println(result4.getString(6)); %>&initId=<% out.println(result4.getString(7)); %>"><img border="0" src="assets/images/close_16.png"></a></td><td>Make Admin</td></tr>
 		<% 
 		if((disCounter==disabledUsers) && (disabledUsers!=0)){%>
-			</table>
+			</table><br>
 			<u>Ενεργοί Χρήστες</u>
-			<table class="projects"><%
+			<table class="projects">
+			<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Make Admin</th></tr>
+			<%
 		}
 		if((enabledUsers==0) && (enControl==true)){
 			enControl=false;
@@ -129,12 +151,23 @@ try{
 	}%>
 	</table>
 	</div>
+	<div align="right">[<%
+		for(i=1;i<=totalPages;i++){
+	    	if(i==pageNumber){
+	        	out.println(i);
+	        }else{
+	            %>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
+	        }
+	     }
+	%>]</div>
 	<%
 	
 }catch(SQLException e){
 	e.printStackTrace();
 }finally{
 	dbpoint.closedb(con);
+	dbpoint.closedb(con3);
+	dbpoint.closedb(con4);
 }
 %>
 
