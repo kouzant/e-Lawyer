@@ -57,6 +57,20 @@
 		<servlet-name>UserDel</servlet-name>
 		<servlet-class>myservs.UserDel</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>MakeAdmin</display-name>
+		<servlet-name>MakeAdmin</servlet-name>
+		<servlet-class>myservs.MakeAdmin</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>CaseDel</display-name>
+		<servlet-name>CaseDel</servlet-name>
+		<servlet-class>myservs.CaseDel</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>CheckLogin</servlet-name>
 		<url-pattern>/CheckLogin</url-pattern>
@@ -88,6 +102,14 @@
 	<servlet-mapping>
 		<servlet-name>UserDel</servlet-name>
 		<url-pattern>/UserDel</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MakeAdmin</servlet-name>
+		<url-pattern>/MakeAdmin</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CaseDel</servlet-name>
+		<url-pattern>/CaseDel</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

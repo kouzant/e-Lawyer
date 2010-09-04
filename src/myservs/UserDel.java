@@ -51,7 +51,6 @@ public class UserDel extends HttpServlet {
 		dbPoint.deleteUser(userId, initId);
 		
 		String userPath=getServletContext().getRealPath("/uploads").concat("/").concat(initId);
-		System.out.println("userPath: "+userPath);
 		File file=new File(userPath);
 		deleteDirectory(file);
 		

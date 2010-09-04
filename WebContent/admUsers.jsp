@@ -7,6 +7,7 @@
 <%if ((session.getAttribute("login")=="1") && (session.getAttribute("isadmin").toString().equals("1"))){ %>
 <h2>Διαχείριση Χρηστών</h2>
 <img border="0" src="assets/images/spacer.gif"><br>
+<div align="center">
 <%
 if (session.getAttribute("error")=="1"){
 %>
@@ -27,8 +28,17 @@ if(session.getAttribute("userDelete")=="1"){%>
 <%
 session.setAttribute("userDelete","0");
 }
+if(session.getAttribute("makeAdmin")=="0"){
+	%>
+	<font color="red"><u>Η αλλαγή απέτυχε. Επικοινωνήστε με το διαχειριστή.</u></font><br><%
+	session.setAttribute("adminUpdate","-1");
+}else if(session.getAttribute("makeAdmin")=="1"){%>
+	<font color="green"><u>Η αλλαγή ολοκληρώθηκαι επιτυχώς.</u></font><br>
+	<%
+	session.setAttribute("makeAdmin","-1");
+}
 %>
-
+</div>
 <a href="javascript:showdiv()">Αναζήτηση</a>
 
 <form method="post">
@@ -109,14 +119,14 @@ try{
 	    	if(i==pageNumber){
 	        	out.println(i);
 	        }else{
-	            %>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
+	            %>&nbsp;<a href="admUsers.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
 	        }
 	     }
 	%>]</div>	
 	<div align="center">
-	<u>Ανενεργοί Χρήστες</u>
+	<h3><u>Ανενεργοί Χρήστες</u></h3>
 	<table class="projects">
-	<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Make Admin</th></tr>
+	<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Κατάσταση</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Αλλαγή<br>Κατάστασης</th></tr>
 	<%
 	int disCounter=1;
 	boolean disControl=true;
@@ -126,18 +136,18 @@ try{
 			disControl=false;
 			%><div align="center">---</div>
 			</table>
-			<u>Ενεργοί Χρήστες</u>
+			<h3><u>Ενεργοί Χρήστες</u></h3>
 			<table class="projects">
 			<%
 		}
 		%>
-		<tr align="center"><td><% out.println(result4.getString(2)); %></td><td><% out.println(result4.getString(3)); %></td><td><% out.println(result4.getString(4)); %></td><td><a href="admEdit.jsp?id=<% out.println(result4.getString(6));%>"><img border="0" src="assets/images/tools_16.png"></a> </td><td><a href="UserDel?userId=<% out.println(result4.getString(6)); %>&initId=<% out.println(result4.getString(7)); %>"><img border="0" src="assets/images/close_16.png"></a></td><td>Make Admin</td></tr>
+		<tr align="center"><td><% out.println(result4.getString(2)); %></td><td><% out.println(result4.getString(3)); %></td><td><% out.println(result4.getString(4)); %></td><td><% if(result4.getInt(11)==0){ out.println("Απλός Χρήστης"); }else{out.println("Διαχειριστής"); } %></td><td><a href="admEdit.jsp?id=<% out.println(result4.getString(6));%>"><img border="0" src="assets/images/tools_16.png"></a> </td><td><a href="UserDel?userId=<% out.println(result4.getString(6)); %>&initId=<% out.println(result4.getString(7)); %>"><img border="0" src="assets/images/close_16.png"></a></td><td><a href="MakeAdmin?userId=<% out.println(result4.getString(6)); %>"><img src="assets/images/user_16.png"></a></td></tr>
 		<% 
 		if((disCounter==disabledUsers) && (disabledUsers!=0)){%>
 			</table><br>
-			<u>Ενεργοί Χρήστες</u>
+			<h3><u>Ενεργοί Χρήστες</u></h3>
 			<table class="projects">
-			<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Make Admin</th></tr>
+			<tr align="center"><th>Όνομα</th><th>Επίθετο</th><th>e-mail</th><th>Κατάσταση</th><th>Αλλαγή<br>Στοιχείων</th><th>Διαγραφή</th><th>Αλλαγή<br>Κατάστασης</th></tr>
 			<%
 		}
 		if((enabledUsers==0) && (enControl==true)){
@@ -156,7 +166,7 @@ try{
 	    	if(i==pageNumber){
 	        	out.println(i);
 	        }else{
-	            %>&nbsp;<a href="preview.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
+	            %>&nbsp;<a href="admUsers.jsp?pageNumber=<%= i %>"><%= i %></a>&nbsp;<%
 	        }
 	     }
 	%>]</div>

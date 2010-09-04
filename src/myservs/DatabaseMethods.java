@@ -75,6 +75,31 @@ public class DatabaseMethods {
 		}
 	}
 	
+	public int makeAdmin(String userId){
+		Connection con=null;
+		int result=0;
+		String adminQuery="0";
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String qString="SELECT isadmin FROM users WHERE id=\'"+userId+"\'";
+			ResultSet admin=stmt.executeQuery(qString);
+			admin.next();
+			if(admin.getInt(1)==0){
+				adminQuery="UPDATE users SET isadmin='1' WHERE id=\'"+userId+"\'";
+			}else if(admin.getInt(1)==1){
+				adminQuery="UPDATE users SET isadmin='0' WHERE id=\'"+userId+"\'";
+			}
+			result=stmt.executeUpdate(adminQuery);
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return result;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	public int uploadTable(String title, String description, String location, String userid){
 		Connection con=null;
 		try{
@@ -233,6 +258,23 @@ public class DatabaseMethods {
 			result=stmt.executeUpdate(fileString);
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			closedb(con);
+		}
+	}
+	
+	public int caseDelete(int caseId){
+		Connection con=null;
+		int result=0;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String delString="DELETE FROM uploads WHERE uploads.key=\'"+caseId+"\'";
+			result=stmt.executeUpdate(delString);
+			return result;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return result;
 		}finally{
 			closedb(con);
 		}
