@@ -217,6 +217,23 @@ public class DatabaseMethods {
 		}		
 	}
 	
+	public int updateCases(int caseId, String title, String description){
+		Connection con=null;
+		int success=0;
+		try{
+			con=connect();
+			Statement stmt=con.createStatement();
+			String qString="UPDATE uploads SET title=\'"+title+"\', description=\'"+description+"\' WHERE uploads.key=\'"+caseId+"\'";
+			success=stmt.executeUpdate(qString);
+			return success;
+		}catch(SQLException e){
+			e.printStackTrace();
+			return success;
+		}finally{
+			closedb(con);
+		}
+	}
+	
 	//Login method
 	public String[] identifyUser(String email, String password){
 		Connection con=null;

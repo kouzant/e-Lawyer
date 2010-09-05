@@ -20,8 +20,7 @@
     }else{
     	out.println("<h2>Welcome back</h2>");
     	}
-    	
-	%>
+    		%>
       <p class="floatright alignright"><b>Page 1</b><br />
         [ 1, <a href="http://www.free-css.com/">2</a>, <a href="http://www.free-css.com/">3</a>, <a href="http://www.free-css.com/">4</a> ]</p>
       <h1>Example Headline One</h1>

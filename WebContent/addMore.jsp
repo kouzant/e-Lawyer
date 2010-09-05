@@ -16,7 +16,7 @@ if (session.getAttribute("fieldsEmpty")=="1"){%>
 if (session.getAttribute("uploadPfiledbError")=="1"){%>
 <font color=red>Database Error. Επικοινωνήστε με τον διαχειριστή.</font>
 <%session.setAttribute("uploadPfiledbError","0"); } %>
-<form method="post" action="AddProject" enctype="multipart/form-data">
+<form method="post" action="AddProject" enctype="multipart/form-data" name="addmore">
 <table border="0" align="left">
 <tr>
 <th><h4></h4> </th><th><input type="hidden" name="title" value="<% out.println(request.getParameter("title")); %>"></th></tr>
@@ -25,8 +25,12 @@ if (session.getAttribute("uploadPfiledbError")=="1"){%>
 <tr><th><h4>* Αρχείο:</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
 <% session.setAttribute("addMoreForm", "1"); %>
-<tr><th><input type="submit" value="" style="background:url(assets/images/upload.png);width:70px;height:25px;border:0;"></th></tr>
-</table>
+<tr align="center"><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.addmore.submit()">Προσθήκη</a></li>
+</ul>
+</td>
+</tr></table>
 </form>
 <%}else{ 
 %>

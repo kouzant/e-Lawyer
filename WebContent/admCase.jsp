@@ -15,17 +15,37 @@
 	<font color="green"><u>Η διαγραφή ολοκληρώθηκαι επιτυχώς.</u></font><br>
 	<%
 	session.setAttribute("caseDelete","-1");
-}%>
+}
+if(session.getAttribute("emptyCaseEdit")=="1"){%>
+	<font color="red"><u>Η αλλαγή απέτυχε. Συμπληρώστε όλα τα απαραίτητα πεδία.</u></font><br><%
+	session.setAttribute("emptyCaseEdit","0");
+}
+if(session.getAttribute("EditCase")=="1"){%>
+	<font color="green"><u>Η αλλαγή ολοκληρώθηκαι επιτυχώς.</u></font><br><%
+	session.setAttribute("EditCase","-1");
+}else if(session.getAttribute("EditCase")=="0"){%>
+		<font color="red"><u>Η αλλαγή απέτυχε. Επικοινωνήστε με το διαχειριστή.</u></font><br><%
+		session.setAttribute("EditCase","-1");
+	}
+%>
+
 <a href="javascript:showdiv()">Αναζήτηση</a>
 
 <form method="post">
 <input type="hidden" id="buttonPushed">
 
 <div id="searchDiv" style="visibility:hidden;">
+<table border="0">
 <form method="post" action="admCase.jsp">
 <input type="hidden" name="enableSearch">
-Λέξη κλειδί: <input type="text" name="searchString">
-<input type="submit" value="Search">
+<tr><td>Λέξη κλειδί: </td><td><input type="text" name="searchString"></td></tr>
+<tr><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.previewsearch.submit()">Αναζήτηση</a></li>
+</ul>
+</div>
+</td></tr>
+</table>
 </form>
 </div>
 <%

@@ -23,15 +23,19 @@ if (session.getAttribute("overSize")=="1"){%>
 if (session.getAttribute("dbFailure")=="1"){%>
 <font color=red>Database Error. Επικοινωνήστε με τον διαχειριστή.</font>
 <%session.setAttribute("dbFailure","0"); } %>
-<form method="post" action="Publish" method="post" enctype="multipart/form-data">
+<form method="post" action="Publish" method="post" enctype="multipart/form-data" name="publish">
 <table border="0" align="left">
 <tr>
 <th><h4>* Τίτλος:</h4> </th><th><input type="text" name="title"></th></tr>
 <tr><th><h4>* Περιγραφή:</h4></th> <th><textarea name="description" cols="30" rows="5"></textarea></th></tr>
 <tr><th><h4>* Αρχείο (σε μορφή pdf):</h4></th> <th><input type="file" name="file"></th></tr>
 <tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
-<tr><th><input type="submit" value="" style="background:url(assets/images/upload.png);width:70px;height:25px;border:0;"></th></tr>
-</table>
+<tr align="right"><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.publish.submit()">Αλλαγή</a></li>
+</ul>
+</td>
+</tr></table>
 </form>
 <br>
 <%}else{ 

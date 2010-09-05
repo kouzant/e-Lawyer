@@ -47,15 +47,16 @@ public class UserDel extends HttpServlet {
 		
 		DatabaseMethods dbPoint=new DatabaseMethods();
 		HttpSession userSession=request.getSession();
-		
-		dbPoint.deleteUser(userId, initId);
-		
-		String userPath=getServletContext().getRealPath("/uploads").concat("/").concat(initId);
-		File file=new File(userPath);
-		deleteDirectory(file);
-		
-		userSession.setAttribute("userDelete", "1");
-		
+		if (Integer.parseInt(userSession.getAttribute("isadmin").toString())==1){
+			dbPoint.deleteUser(userId, initId);
+
+			String userPath = getServletContext().getRealPath("/uploads")
+					.concat("/").concat(initId);
+			File file = new File(userPath);
+			deleteDirectory(file);
+
+			userSession.setAttribute("userDelete", "1");
+		}
 		RequestDispatcher rd=getServletContext().getRequestDispatcher("/admUsers.jsp");
 		if(rd!=null){
 			rd.forward(request, response);

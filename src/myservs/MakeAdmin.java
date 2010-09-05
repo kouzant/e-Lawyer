@@ -29,15 +29,16 @@ public class MakeAdmin extends HttpServlet {
 		DatabaseMethods dbPoint = new DatabaseMethods();
 		HttpSession userSession=request.getSession();
 		
-		String userId=request.getParameter("userId").toString();
-		int success=dbPoint.makeAdmin(userId);
-		
-		if(success!=0){
-			userSession.setAttribute("makeAdmin", "1");
-		}else{
-			userSession.setAttribute("makeAdmin", "0");
+		if(Integer.parseInt(userSession.getAttribute("isadmin").toString())==1){
+			String userId = request.getParameter("userId").toString();
+			int success = dbPoint.makeAdmin(userId);
+
+			if (success != 0) {
+				userSession.setAttribute("makeAdmin", "1");
+			} else {
+				userSession.setAttribute("makeAdmin", "0");
+			}
 		}
-		
 		RequestDispatcher rd=getServletContext().getRequestDispatcher("/admUsers.jsp");
 		if(rd!=null){
 			rd.forward(request, response);

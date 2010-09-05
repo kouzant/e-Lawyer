@@ -12,10 +12,17 @@
 <input type="hidden" id="buttonPushed">
 
 <div id="searchDiv" style="visibility:hidden;">
-<form method="post" action="preview.jsp">
+<table border="0">
+<form method="post" action="preview.jsp" name="previewsearch">
 <input type="hidden" name="enableSearch">
-Λέξη κλειδί: <input type="text" name="searchString">
-<input type="submit" value="Search">
+<tr><td>Λέξη κλειδί: </td><td><input type="text" name="searchString"></td></tr>
+<tr><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.previewsearch.submit()">Αναζήτηση</a></li>
+</ul>
+</div>
+</td></tr>
+</table>
 </form>
 </div>
 <%

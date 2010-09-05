@@ -38,24 +38,27 @@ public class AdminChangeData extends HttpServlet {
 		DatabaseMethods dbPoint = new DatabaseMethods();
 		Auxiliary auxPoint = new Auxiliary();
 		HttpSession userSession=request.getSession();
-		String initId=userSession.getAttribute("userInitId").toString();
-		userSession.removeAttribute("userInitId");
-		if(name.isEmpty() || surname.isEmpty() || email.isEmpty()){
-			userSession.setAttribute("error", "1");
-		}else{
-			String id=name.concat(surname).concat(email);
-			String idHash=auxPoint.shaDigest(id);
-			
-			int intTelephone = auxPoint.integerize(telephone);
-			int intPostcode = auxPoint.integerize(postcode);
-			int result = dbPoint.updateAdmUser(name, surname, email, idHash,
-					intTelephone, address, intPostcode, state, initId);
-
-			if (result != 0) {
-				userSession.setAttribute("adminUpdate", "1");
+		if(Integer.parseInt(userSession.getAttribute("isadmin").toString())==1){
+			String initId = userSession.getAttribute("userInitId").toString();
+			userSession.removeAttribute("userInitId");
+			if (name.isEmpty() || surname.isEmpty() || email.isEmpty()) {
+				userSession.setAttribute("error", "1");
 			} else {
-				System.out.println("Update Failure");
-				userSession.setAttribute("adminUpdate", "0");
+				String id = name.concat(surname).concat(email);
+				String idHash = auxPoint.shaDigest(id);
+
+				int intTelephone = auxPoint.integerize(telephone);
+				int intPostcode = auxPoint.integerize(postcode);
+				int result = dbPoint.updateAdmUser(name, surname, email,
+						idHash, intTelephone, address, intPostcode, state,
+						initId);
+
+				if (result != 0) {
+					userSession.setAttribute("adminUpdate", "1");
+				} else {
+					System.out.println("Update Failure");
+					userSession.setAttribute("adminUpdate", "0");
+				}
 			}
 		}
 		RequestDispatcher rd=getServletContext().getRequestDispatcher("/admUsers.jsp");

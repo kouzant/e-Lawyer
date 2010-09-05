@@ -58,9 +58,17 @@ if (session.getAttribute("downloadLink")!=null){%>
 session.removeAttribute("downloadLink");
 }%>
 </div>
-<div align="right"><form method="post" action="Download">
-Έκδοση: <input type="text" name="fileVersion" size="1"><br>
-<input type="submit" value="Download"></form></div><br>
+<div align="right"><form method="post" action="Download" name="projectDownload">
+<table border="0">
+<tr><td>Έκδοση: </td><td><input type="text" name="fileVersion" size="1"></td></tr>
+<tr align="center"><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.projectDownload.submit()">Download</a></li>
+</ul>
+</td>
+</tr>
+</table>
+</form></div><br>
 <%
 %><div align="right">[<%
 	for(i=1;i<=totalPages;i++){

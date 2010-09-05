@@ -41,14 +41,21 @@ if(session.getAttribute("makeAdmin")=="0"){
 </div>
 <a href="javascript:showdiv()">Αναζήτηση</a>
 
-<form method="post">
+<form method="post" name="searchenable">
 <input type="hidden" id="buttonPushed">
 
 <div id="searchDiv" style="visibility:hidden;">
+<table border="0">
 <form method="post" action="preview.jsp">
 <input type="hidden" name="enableSearch">
-Λέξη κλειδί: <input type="text" name="searchString">
-<input type="submit" value="Search">
+<tr><td>Λέξη κλειδί: </td><td><input type="text" name="searchString"></td></tr>
+<tr><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.searchenable.submit()">Αναζήτηση</a></li>
+</ul>
+</div>
+</td></tr>
+</table>
 </form>
 </div>
 <%

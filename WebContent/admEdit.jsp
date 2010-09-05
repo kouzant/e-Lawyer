@@ -18,7 +18,7 @@ try{
 	result.next();
 	session.setAttribute("userInitId",result.getString(7));
 	%>
-	<form method="post" action="AdminChangeData">
+	<form method="post" action="AdminChangeData" name="admedit">
 	<table border="0" align="left">
 	<tr>
 	<th><h4>* Όνομα:</h4> </th><th><input type="text" name="name" value="<%out.println(result.getString(2));%>"></th></tr>
@@ -30,8 +30,12 @@ try{
 	<tr><th><h4>&nbsp;&nbsp;Κατάσταση:</h4></th><th><input type="radio" name="state" value="1" <% if(result.getInt(12)==1) out.println("checked"); %>>&nbsp;Ενεργός</th></tr>
 	<tr><th></th><th><input type="radio" name="state" value="0" <% if(result.getInt(12)==0) out.println("checked"); %>>&nbsp;Ανενεργός</th></tr>
 	<tr><th><h4 align="left">* Υποχρεωτικά Πεδία</h4></th></tr>
-	<tr><th><input type="submit" value="Change" ></th></tr>
-	</table>
+<tr align="center"><td>
+<ul id="subnav">
+<li><a href="#" onclick="document.admedit.submit()">Αλλαγή</a></li>
+</ul>
+</td>
+</tr>	</table>
 	</form>
 <%
 }catch(SQLException e){
