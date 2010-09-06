@@ -4,6 +4,22 @@
 
     <div id="col_2">
     <%
+    if (session.getAttribute("error")=="1"){
+    %>
+    <font color="red"><u>Συμπληρώστε όλα τα απαραίτητα πεδία.</u></font>
+    <%} 
+    if (session.getAttribute("error")=="2"){
+    %>
+    <font color="red"><u>Οι κωδικοί που εισάγατε δεν ταιριάζουν.</u></font>
+    <%}
+    if (session.getAttribute("error")=="3"){
+    %>
+    <font color="red"><u>FATAL ERROR: Η εγγραφή στη βάση απέτυχε. Ενημερώστε τον διαχειριστή.</u></font>
+    <%}
+    if (session.getAttribute("error")=="4"){
+    %>
+    <font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
+    <%}
     if (session.getAttribute("falseLogin") == "1") {
     	%><div align="center">
     	<font color="red"><u>Λανθασμένα στοιχεία εισόδου.</u></font><br> 
@@ -15,21 +31,19 @@
     	<font color="red">Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμα.</font>
     	</div>
     <%}
-    if (session.isNew()){
-    	out.println("<h2>Welcome newcomer</h2>");
-    }else{
-    	out.println("<h2>Welcome back</h2>");
-    	}
     		%>
-      <p class="floatright alignright"><b>Page 1</b><br />
-        [ 1, <a href="http://www.free-css.com/">2</a>, <a href="http://www.free-css.com/">3</a>, <a href="http://www.free-css.com/">4</a> ]</p>
-      <h1>Example Headline One</h1>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer pede. Aliquam facilisis. Nulla gravida elit at eros. Nunc arcu. In urna velit, gravida ut, venenatis id, suscipit ut, massa. Proin bibendum luctus turpis. Nam porttitor ante ut leo. Integer luctus venenatis sem. Maecenas non ante. Ut semper. Duis vel velit. Ut porta. Etiam rutrum purus at mauris molestie aliquam. Pellentesque ornare. Aenean convallis dictum quam. Etiam sodales magna in mi. Phasellus risus nunc, lacinia sit amet, accumsan sed, blandit et, orci. Nulla id augue et nibh tincidunt convallis. Fusce euismod neque vel sem. Sed et turpis in nisl interdum tincidunt. </p>
-      <h2>Example Headline Two</h2>
-      <blockquote>This would obviously be an example blockquote. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer pede. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer pede.</blockquote>
-      <h3>Example Headline Three</h3>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer pede. Aliquam facilisis. Nulla gravida elit at eros. Nunc arcu. In urna velit, gravida ut, venenatis id, suscipit ut, massa.</p>
-      <p>Proin bibendum luctus turpis. Nam porttitor ante ut leo. Integer luctus venenatis sem. Maecenas non ante. Ut semper. Duis vel velit. Ut porta. Etiam rutrum purus at mauris molestie aliquam. Pellentesque ornare. Aenean convallis dictum quam. Etiam sodales magna in mi. Phasellus risus nunc, lacinia sit amet, accumsan sed, blandit et, orci. Nulla id augue et nibh tincidunt convallis. Fusce euismod neque vel sem. Sed et turpis in nisl interdum tincidunt. </p>
+      <h3>Καλώς ήρθατε στο e-Lawyer</h3>
+      <p>Το e-Lawyer είναι μία διαδικτυακή πλατφόρμα για την διευκόλυνση των δικηγόρων.
+      Κύριος στόχος του είναι η κεντρικοποιημένη και ψηφιακή αποθήκευση δεδικασμένων υποθέσεων
+      που θα είναι εύκολα προσπελάσιμες από τον περιηγητή σας.
+      <p>Επίσης το e-Lawyer προσφέρει ένα εξελιγμένο σύστημα για αποθήκευση και ενημέρωση των
+      εγγράφων σας χωρίζοντας το σε εκδόσεις.
+      <p>Ποτέ πλέον δεν θα χρειαστεί να ψάχνετε για δεδικασμένες υποθέσεις σε σκονισμένα ράφια.
+      Θα τα έχετε μπροστά σας με τον πλέον σύγχρονο τρόπο.
+      <p>Με το e-Lawyer δεν θα χρειαστεί να ανυσηχείτε μήπως χαλάσετε το κείμενο που με τόσο κόπο
+      φτιάχνετε ή ακόμα χειρότερα να το διαγράψετε. Πολύ απλά, κάθε φορά που νομίζετε ότι το 
+      έγγραφο είναι σωστό, απλώς ενημερώστε τον φάκελό σας στο σύστημα. Σε περίπτωση απώλειας απλά
+      κατεβάστε την τελευταία έκδοση ή όποια άλλη θέλετε.
     </div>
     
 <%@ include file="footer.jsp" %>

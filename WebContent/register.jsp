@@ -4,22 +4,6 @@
 
 <div id="col_2">
 <%
-if (session.getAttribute("error")=="1"){
-%>
-<font color="red"><u>Συμπληρώστε όλα τα απαραίτητα πεδία.</u></font>
-<%} 
-if (session.getAttribute("error")=="2"){
-%>
-<font color="red"><u>Οι κωδικοί που εισάγατε δεν ταιριάζουν.</u></font>
-<%}
-if (session.getAttribute("error")=="3"){
-%>
-<font color="red"><u>FATAL ERROR: Η εγγραφή στη βάση απέτυχε. Ενημερώστε τον διαχειριστή.</u></font>
-<%}
-if (session.getAttribute("error")=="4"){
-%>
-<font color="red"><u>Ο χρήστης με τα παρακάτω στοιχεία υπάρχει ήδη.</u></font>
-<%}
 if(session.getAttribute("email")!=null){%>
 <div align="center">
 <font color="red"><u>Είστε ήδη εγγεγραμμένος στο σύστημα. Αν χρησιμοποιήτε κοινόχρηστο λογαριασμό και θέλετε όντως να εγγραφήτε, καθαρίστε το Ιστορικό του περιηγητή σας.</u></font>

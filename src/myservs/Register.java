@@ -77,7 +77,7 @@ public class Register extends HttpServlet {
 		userSession.setAttribute("address", address);
 		userSession.setAttribute("postcode", postcode);
 		
-		RequestDispatcher rd=getServletContext().getRequestDispatcher("/register.jsp");
+		RequestDispatcher rd=getServletContext().getRequestDispatcher("/index.jsp");
 		if(rd!=null){
 			rd.forward(request, response);
 		}
