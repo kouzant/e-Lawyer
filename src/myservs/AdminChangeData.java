@@ -5,7 +5,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class AdminChangeData
+ * Administrator servlet class which implements the administration ability to change personal data of the
+ * registered users.
  */
 public class AdminChangeData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +20,12 @@ public class AdminChangeData extends HttpServlet {
     }
 
 	/**
+	 * Parse the new data from the form fields of admEdit.jsp, checks whether an obligatory
+	 * field is empty, produces the hashes of id and password and then updates the database.
+	 * Finally, redirects the request and response to admUsers.jsp
+	 * @see DatabaseMethods#updateAdmUser(String, String, String, String, int, String, int, int, String)
+	 * @see Auxiliary#shaDigest(String)
+	 * @see Auxiliary#integerize(String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -16,7 +16,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 /**
- * Servlet implementation class AddProject
+ * Servlet class implementing AddProject feature which adds a project to user's 
+ * personal repository.
+ * 
+ * @author Antonis Kouzoupis
  */
 public class AddProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +29,7 @@ public class AddProject extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
+     * 
      */
     public AddProject() {
         super();
@@ -37,6 +41,12 @@ public class AddProject extends HttpServlet {
     }
 
 	/**
+	 * Parses all the parameters from the form of addProject.jsp or addMore.jsp including the file.
+	 * Then finds the revision of that file, writes the file to a specific directory at the server
+	 * and then populates the appropriate table of the database. Finally redirects the response and the request
+	 * to either addProject.jsp or the addMore.jsp
+	 * @see DatabaseMethods#findFileRevision(String)
+	 * @see DatabaseMethods#populatePfileTable(String, String, int, String, String, String, String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

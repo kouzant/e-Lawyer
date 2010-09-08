@@ -3,10 +3,11 @@ package myservs;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.util.regex.*;
 
 /**
- * Servlet implementation class CaseDel
+ * Administrator servlet class that deletes a case from the database.
+ * 
+ * @author Antonis Kouzoupis
  */
 public class CaseDel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +21,9 @@ public class CaseDel extends HttpServlet {
     }
 
 	/**
+	 * Parse the case id from the url and then delete it. Finally redirects the response 
+	 * and the request to admCase.jsp
+	 * @see DatabaseMethods#caseDelete(int)
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

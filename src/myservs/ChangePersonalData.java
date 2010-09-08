@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class ChangePersonalData
+ * Servlet class implementation for the change of personal data of the users.
  */
 public class ChangePersonalData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +19,11 @@ public class ChangePersonalData extends HttpServlet {
     }
 
 	/**
+	 * Parse the fields of the form from cpanel.jsp, check whether there is any empty field
+	 * produces the hashed id and password and then updates the record at the database. Finally,
+	 * redirects response and request to cpanel.jsp
+	 * @see Auxiliary#shaDigest(String)
+	 * @see DatabaseMethods#updateUniqueUser(String, String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

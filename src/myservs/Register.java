@@ -6,7 +6,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class Register
+ * Servlet implementation class Register which registers a user
  */
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,7 +19,11 @@ public class Register extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+	/**Parses the data from the form at register.jsp, checks whether an obligatory field is empty,
+	 * produces the sha1 digests of id and password, checks if the user already exists and finally
+	 * updates the appropriate table at database. Also, redirects request and response to index.jsp
+	 * @see DatabaseMethods#registerUser(String, String, String, String, String, int, String, int, int)
+	 * @see Auxiliary#shaDigest(String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

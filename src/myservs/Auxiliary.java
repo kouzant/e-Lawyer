@@ -6,7 +6,21 @@ import java.io.*;
 import java.nio.*;
 import java.nio.channels.*;
 
+/**
+ * Class that implements all the auxiliary methods needed.
+ * @author Antonis Kouzoupis
+ *
+ */
 public class Auxiliary {
+	/**
+	 * Method which takes a string and produces its sha1 hash.
+	 * @see AdminChangeData
+	 * @see ChangePersonalData
+	 * @see CheckLogin
+	 * @see Register
+	 * @param id A string. Used only for id and password.
+	 * @return idHashed The hash of the given string.
+	 */
 	public String shaDigest(String id){
     	//SHA1 digest from id for unity
 		byte[] idBytes=id.getBytes();
@@ -20,7 +34,6 @@ public class Auxiliary {
 			for (int i=0;i<messageDigest.length;i++){
 				hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
 			}
-			//String foo=messageDigest.toString();
 			id=hexString+"";
 			String idHashed=hexString.toString();
 			return idHashed;
@@ -31,8 +44,15 @@ public class Auxiliary {
 			return error;
     }
 	
-	//Convert from string to integer
-    public int integerize(String string){
+	/**
+	 * Method to transform a string to integer.
+	 * @see AdminChangeData
+	 * @see ChangePersonalData
+	 * @see Register
+	 * @param string Any given string.
+	 * @return intResult The integer representation of the given string.
+	 */
+	public int integerize(String string){
     	try{
     		int intResult=Integer.parseInt(string);
     		return intResult;
@@ -42,8 +62,12 @@ public class Auxiliary {
     	}
     }
 
-  //Convert from integer to string
-    public String stringerize(int integer){
+	/**
+	 * Method to transform an integer to a string.
+	 * @param integer Any given integer
+	 * @return strResult The string representation of the given integer.
+	 */
+	public String stringerize(int integer){
     	try{
     		String strResult=Integer.toString(integer);
     		return strResult;
@@ -54,6 +78,12 @@ public class Auxiliary {
     }
     
 
+	/**
+	 * Method which copies a file to another location at the filesystem.
+	 * @param sourceFile The path of the source file.
+	 * @param destFile The path of the destination file.
+	 * @throws IOException
+	 */
     public void copyFile(File sourceFile, File destFile) throws IOException {
     	 if(!destFile.exists()) {
     	  destFile.createNewFile();

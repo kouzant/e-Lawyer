@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Servlet implementation class Download
+ * Servlet implementation class which produces a downloadable file with specific version from any project owned.
  */
 public class Download extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,6 +22,10 @@ public class Download extends HttpServlet {
     }
 
 	/**
+	 * Parses the revision number from the form at page myProject.jsp and the specific file from the session.
+	 * Removes the trailing revision from the filename and copies it to a downloadable location.
+	 * Then returns to myProject.jsp
+	 * @see DatabaseMethods#getFileAttributes(String, int)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,7 +15,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
- * Servlet implementation class Publish
+ * Servlet implementation class for publishing a case.
  */
 public class Publish extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,6 +38,10 @@ public class Publish extends HttpServlet {
     }
 
 	/**
+	 * Parses the fields from the form at publish.jsp including the file. Then, writes the file to a
+	 * specific directory at the server and insert a new record at database server. Then
+	 * redirects request and response to publish.jsp
+	 * @see DatabaseMethods#uploadTable(String, String, String, String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

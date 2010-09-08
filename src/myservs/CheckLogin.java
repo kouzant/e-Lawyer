@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class CheckLogin
+ * Servlet implementation class which checks if the user's credentials are correct.
  */
 public class CheckLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -18,6 +18,11 @@ public class CheckLogin extends HttpServlet {
     }
 
 	/**
+	 * Parses the fields from left.jsp and checks whether the combination of email and password
+	 * is correct. Then loads the session with the user's data so as to be accessible from everywhere.
+	 * Finally, redirects the request and response to index.jsp
+	 * @see Auxiliary#shaDigest(String)
+	 * @see DatabaseMethods#identifyUser(String, String)
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

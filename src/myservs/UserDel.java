@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class UserDel
+ * Administration servlet implementation class UserDel which deletes a user from the system.
  */
 public class UserDel extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +35,10 @@ public class UserDel extends HttpServlet {
     }
 
 	/**
+	 * Parses the user id as well as the initial user id from the url, removes the record
+	 * from the database and deletes the files he owns at the server's filesystem. Finally,
+	 * redirects request and response to admUsers.jsp
+	 * @see DatabaseMethods#deleteUser(String, String)
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

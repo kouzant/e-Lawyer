@@ -5,7 +5,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class EditCase
+ * Administrator servlet implementation class which update a case in database.
  */
 public class EditCase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +19,9 @@ public class EditCase extends HttpServlet {
     }
 
 	/**
+	 * Parses the case id, the new title and the new description from the form at editCase.jsp 
+	 * and update the record at the database. Then redirects request and response to admCase.jsp
+	 * @see DatabaseMethods#updateCases(int, String, String)
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -5,7 +5,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 /**
- * Servlet implementation class MakeAdmin
+ * Administration servlet implementation class which switches states of a user 
+ * between administrator or regular user.
  */
 public class MakeAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,6 +20,9 @@ public class MakeAdmin extends HttpServlet {
     }
 
 	/**
+	 * Parses the user id from the url and if the user is already administrator, becomes user
+	 * and vice versa. Then redirects request and response to admUsers.jsp
+	 * @see DatabaseMethods#makeAdmin(String)
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
